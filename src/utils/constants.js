@@ -1,0 +1,1 @@
+export const quoteApi = 'https://type.fit/api/quotes';
