@@ -1,4 +1,3 @@
-import logo from '../../logo.svg';
 import QuoteGenerator from '../Quote-generator/Quote-generator';
 import './App.css';
 
