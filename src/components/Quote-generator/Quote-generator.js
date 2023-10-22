@@ -1,7 +1,7 @@
 import './Quote-generator.css';
 import { getQuotes } from '../../utils/QuoteAPI';
 import { useEffect, useState } from 'react';
-import { VKShareButton } from "react-share";
+import { TelegramShareButton } from "react-share";
 
 
 function QuoteGenerator() {
@@ -21,8 +21,10 @@ function QuoteGenerator() {
         getQuotes()
             .then(data => {
                 setQuotes(data);
-                const randomIndex = Math.floor(Math.random() * data.length);
-                setRandomQuote(data[randomIndex]);
+                if (Object.keys(randomQuote).length === 0) {
+                    const randomIndex = Math.floor(Math.random() * data.length);
+                    setRandomQuote(data[randomIndex]);
+                }
             })
             .catch(error => {
                 console.error(error);
@@ -30,7 +32,7 @@ function QuoteGenerator() {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }, [randomQuote]);
 
     function getShareMessage() {
         return `${randomQuote.text} - ${randomQuote.author}`;
@@ -62,11 +64,12 @@ function QuoteGenerator() {
                         </div>
 
                         <div className='quote__button-container'>
-                            <VKShareButton title={getShareMessage()} url={window.location.href}>
+                            <TelegramShareButton url={window.location.href} title={getShareMessage()}>
                                 <div className='quote__button button__share'>
-                                    <i className='fa fa-vk' title='Share it on Vk'></i>
+                                    <i className='fa fa-telegram' title='Share it on Telegram'></i>
                                 </div>
-                            </VKShareButton>
+                            </TelegramShareButton>
+
                             <button className='quote__button button__new-quote' title='Generate new quote' onClick={newQuote}>New Quote</button>
                         </div>
                     </div>
