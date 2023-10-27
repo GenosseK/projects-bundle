@@ -1,7 +1,7 @@
 import { unsplashApiUrl } from "./constants";
 
 
-const authorizationKey = 'TaXJ52zkwbvN81fh5H_7NckCwf9Bqo2zC3n7n2T3ec4'
+const authorizationKey = '1wzecIkcgoih1QGnwOU1S_pswqVnf2SnDIGHE0flF7k'
 
 class UnsplashApi {
     constructor({ baseURL, headers }) {
