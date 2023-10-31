@@ -2,7 +2,7 @@ import QuoteGenerator from '../Quote-generator/Quote-generator';
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import './App.css';
 import InfiniteScroll from '../Infinite-scroll/Infinite-scroll';
-import PictureInPicture from '../Pictire-in-Picture/Pictire-in-Picture';
+import PictureInPicture from '../Picture-in-Picture/Picture-in-Picture';
 
 function App() {
   return (

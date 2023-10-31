@@ -12,3 +12,10 @@
     src: url(fonts/BebasNeue-Regular.ttf) format('truetype');
 }
 
+@font-face {
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 400;
+    src: url(fonts/Barlow-Regular.ttf) format('truetype');
+}
+
