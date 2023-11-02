@@ -1,0 +1,44 @@
+.joke-teller {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #45badd url('../../images/robot.gif') no-repeat left center/contain;
+}
+
+.joke-teller__button {
+    width: 180px;
+    height: 60px;
+    cursor: pointer;
+    background-color: #45badd;
+    border: 1.5px solid #91C9FF;
+    outline: none;
+    transition: 1s ease-in-out;
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }
+  
+  .joke-teller__button:hover {
+    transition: .5s ease-in-out;
+    background: #ff3482;
+  }
+
+  .joke-teller__button:disabled {
+    cursor: default;
+    filter: brightness(30%);
+  }
+
+  .joke-teller__button.active {
+    background-color: #ff3482;
+}
+
+@media screen and (max-width: 1000px) {
+    .joke-teller {
+        background-position: center center;
+        background-size: cover;
+    }
+}
+

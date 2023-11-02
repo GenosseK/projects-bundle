@@ -1,0 +1,33 @@
+.darkLight {
+
+}
+
+.darkLight__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__navtab {
+
+}
+
+.navtab__list {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navtab__link {
+    margin-right: 40px;
+}
+
+.navtab__link:last-child {
+    margin-right: 0;
+}
+
+.navtab__link:first-child {
+    margin-left: 40px;
+}
