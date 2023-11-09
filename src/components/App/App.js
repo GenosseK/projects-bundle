@@ -5,6 +5,7 @@ import InfiniteScroll from '../Infinite-scroll/Infinite-scroll';
 import PictureInPicture from '../Picture-in-Picture/Picture-in-Picture';
 import JokeTeller from '../Joke-Teller/Joke-Teller';
 import DarkLight from '../Dark-Light-Mode/Dark-Light-Mode';
+import AnimatedTemplate from '../Animated-Template/Animated-Template';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='picture-in-picture' element={<PictureInPicture />} />
         <Route path='joke-teller' element={<JokeTeller />} />
         <Route path='dark-light' element={<DarkLight />} />
+        <Route path='animated-template' element={<AnimatedTemplate />} />
       </Routes>
     </div>
   );

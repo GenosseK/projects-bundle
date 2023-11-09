@@ -56,7 +56,7 @@ function DarkLight() {
                 <div className="theme-switch-wrapper">
                     <span id="toggle-icon">
                         <span className="toggle-text">{switcherText}</span>
-                        <i className="fa fa-sun-o fas"></i>
+                        <i className="fa fa-sun-o fas sun-image"></i>
                     </span>
                     <label className="theme-switch">
                         <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
@@ -105,12 +105,12 @@ function DarkLight() {
                 </section>
                 <section className='darkLight__section' id='contacts'>
                     <div className='contants__icons'>
-                        <i className='fa fa-github'></i>
-                        <i className='fa fa-codepen'></i>
-                        <i className='fa fa-linkedin'></i>
-                        <i className='fa fa-medium'></i>
-                        <i className='fa fa-telegram'></i>
-                        <i className='fa fa-youtube'></i>
+                        <i className='fa fa-github social-icon'></i>
+                        <i className='fa fa-codepen social-icon'></i>
+                        <i className='fa fa-linkedin social-icon'></i>
+                        <i className='fa fa-medium social-icon'></i>
+                        <i className='fa fa-telegram social-icon'></i>
+                        <i className='fa fa-youtube social-icon'></i>
                     </div>
                 </section>
             </div>

@@ -194,14 +194,14 @@
     line-height: 25px;
 }
 
-.fa {
+.social-icon {
     font-size: 100px;
     margin-right: 50px;
     cursor: pointer;
     color: var(--primary-color);
 }
 
-.fa:hover {
+.social-icon:hover {
     color: var(--on-background);
 }
 
