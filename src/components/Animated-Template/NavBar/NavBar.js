@@ -30,7 +30,7 @@ function Navbar(props) {
             <i
               className={
                 (props.transparent ? "text-white" : "text-gray-800") +
-                " fas fa-bars"
+                "fa fa-bars"
               }
             ></i>
           </button>
@@ -58,7 +58,7 @@ function Navbar(props) {
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
                       : "text-gray-500") +
-                    " far fa-file-alt text-lg leading-lg mr-2"
+                    " fa fa-file-text-o text-lg leading-lg mr-2"
                   }
                 />{" "}
                 Docs
@@ -81,7 +81,7 @@ function Navbar(props) {
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
                       : "text-gray-500") +
-                    " fab fa-facebook text-lg leading-lg "
+                    " fa fa-facebook text-lg leading-lg "
                   }
                 />
                 <span className="lg:hidden inline-block ml-2">Share</span>
@@ -103,7 +103,7 @@ function Navbar(props) {
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
                       : "text-gray-500") +
-                    " fab fa-twitter text-lg leading-lg "
+                    " fa fa-twitter text-lg leading-lg "
                   }
                 />
                 <span className="lg:hidden inline-block ml-2">Tweet</span>
@@ -125,7 +125,7 @@ function Navbar(props) {
                     (props.transparent
                       ? "lg:text-gray-300 text-gray-500"
                       : "text-gray-500") +
-                    " fab fa-github text-lg leading-lg "
+                    " fa fa-github text-lg leading-lg "
                   }
                 />
                 <span className="lg:hidden inline-block ml-2">Star</span>
@@ -143,7 +143,7 @@ function Navbar(props) {
                 type="button"
                 style={{ transition: "all .15s ease" }}
               >
-                <i className="fas fa-arrow-alt-circle-down"></i> Download
+                <i className="fa fa-arrow-circle-o-down"></i> Download
               </button>
             </li>
           </ul>

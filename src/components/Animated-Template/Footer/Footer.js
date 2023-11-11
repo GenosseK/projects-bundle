@@ -36,25 +36,25 @@ function Footer() {
                 className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                 type="button"
               >
-                <i className="flex fab fa-twitter"></i>
+                <i className="flex fa fa-twitter"></i>
               </button>
               <button
                 className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                 type="button"
               >
-                <i className="flex fab fa-facebook-square"></i>
+                <i className="flex fa fa-facebook-square"></i>
               </button>
               <button
                 className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                 type="button"
               >
-                <i className="flex fab fa-dribbble"></i>
+                <i className="flex fa fa-dribbble"></i>
               </button>
               <button
                 className="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                 type="button"
               >
-                <i className="flex fab fa-github"></i>
+                <i className="flex fa fa-github"></i>
               </button>
             </div>
           </div>
