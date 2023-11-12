@@ -7,6 +7,7 @@ import JokeTeller from '../Joke-Teller/Joke-Teller';
 import DarkLight from '../Dark-Light-Mode/Dark-Light-Mode';
 import AnimatedTemplate from '../Animated-Template/Animated-Template';
 import NavigationNation from '../Navigation-Nation/Navigation-Nation';
+import MusicPlayer from '../Music-Player/Music-Player';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='dark-light' element={<DarkLight />} />
         <Route path='animated-template' element={<AnimatedTemplate />} />
         <Route path='navigation-nation' element={<NavigationNation />} />
+        <Route path='music-player' element={<MusicPlayer />} />
       </Routes>
     </div>
   );
