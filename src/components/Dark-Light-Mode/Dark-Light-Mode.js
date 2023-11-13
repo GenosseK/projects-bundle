@@ -4,6 +4,9 @@ import feeling_pround from '../../images/undraw_feeling_proud_light.svg';
 import conceptual_idea from '../../images/undraw_conceptual_idea_light.svg';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { faCodepen, faGithub, faLinkedin, faMedium, faTelegram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 function DarkLight() {
 
@@ -56,7 +59,7 @@ function DarkLight() {
                 <div className="theme-switch-wrapper">
                     <span id="toggle-icon">
                         <span className="toggle-text">{switcherText}</span>
-                        <i className="fa fa-sun-o fas sun-image"></i>
+                        <FontAwesomeIcon icon={faSun} className="sun-icon" />
                     </span>
                     <label className="theme-switch">
                         <input type="checkbox" onChange={toggleTheme} checked={theme === 'dark'} />
@@ -75,15 +78,15 @@ function DarkLight() {
                 <section className='darkLight__section' id='about'>
                     <h1 className='darkLight__title'>Undraw Illustrations</h1>
                     <div className='about__container'>
-                        <div className='image__container'>
+                        <div className='about__image__container'>
                             <h2 className='darkLight__subtitle'>Web Innovation</h2>
                             <img src={proud_coder} alt='Proud Coder' className='about__image' id='image1' />
                         </div>
-                        <div className='image__container'>
+                        <div className='about__image__container'>
                             <h2 className='darkLight__subtitle'>Problem Solving</h2>
                             <img src={feeling_pround} alt='Feeling Proud' className='about__image' id='image2' />
                         </div>
-                        <div className='image__container'>
+                        <div className='about__image__container'>
                             <h2 className='darkLight__subtitle'>High Comcept</h2>
                             <img src={conceptual_idea} alt='Conceptual Idea' className='about__image' id='image3' />
                         </div>
@@ -105,12 +108,12 @@ function DarkLight() {
                 </section>
                 <section className='darkLight__section' id='contacts'>
                     <div className='contants__icons'>
-                        <i className='fa fa-github social-icon'></i>
-                        <i className='fa fa-codepen social-icon'></i>
-                        <i className='fa fa-linkedin social-icon'></i>
-                        <i className='fa fa-medium social-icon'></i>
-                        <i className='fa fa-telegram social-icon'></i>
-                        <i className='fa fa-youtube social-icon'></i>
+                        <FontAwesomeIcon icon={faGithub} className='social-icon' />
+                        <FontAwesomeIcon icon={faCodepen} className='social-icon' />
+                        <FontAwesomeIcon icon={faLinkedin} className='social-icon' />
+                        <FontAwesomeIcon icon={faMedium} className='social-icon' />
+                        <FontAwesomeIcon icon={faTelegram} className='social-icon' />
+                        <FontAwesomeIcon icon={faYoutube} className='social-icon' />
                     </div>
                 </section>
             </div>

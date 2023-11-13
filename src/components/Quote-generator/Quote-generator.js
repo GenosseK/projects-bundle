@@ -2,7 +2,9 @@ import './Quote-generator.css';
 import { getQuotes } from '../../utils/QuoteAPI';
 import { useEffect, useState } from 'react';
 import { TelegramShareButton } from "react-share";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 
 function QuoteGenerator() {
 
@@ -49,7 +51,7 @@ function QuoteGenerator() {
                                 <div className="skeleton-loader"></div>
                             ) : (
                                 <>
-                                    <i className='fa fa-quote-left'></i>
+                                    <FontAwesomeIcon icon={faQuoteLeft} />
                                     <span className='quote__text' id='quote'>{randomQuote.text}</span>
                                 </>
                             )}
@@ -66,7 +68,7 @@ function QuoteGenerator() {
                         <div className='quote__button-container'>
                             <TelegramShareButton url={window.location.href} title={getShareMessage()}>
                                 <div className='quote__button button__share'>
-                                    <i className='fa fa-telegram' title='Share it on Telegram'></i>
+                                    <FontAwesomeIcon icon={faTelegram} />
                                 </div>
                             </TelegramShareButton>
 

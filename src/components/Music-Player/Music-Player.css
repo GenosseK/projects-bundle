@@ -63,8 +63,9 @@
     background: #242323;
     border-radius: 5px;
     height: 100%;
-    width: 66%;
+    width: 0%; /* Make sure it has a width initially */
     transition: width 0.1s linear;
+    cursor: pointer; /* This will show the cursor as a pointer when hovering, indicating it's clickable */
 }
 
 .duration-wrapper {
@@ -72,6 +73,33 @@
     top: -25px;
     display: flex;
     justify-content: space-between;
+}
+
+.player-controls__container {
+    position: relative;
+    top: -15px;
+    left: 120px;
+    width: 200px;
+}
+
+.player-controls__button {
+    font-size: 30px;
+    color: rgb(129, 129, 129);
+    margin-right: 30px;
+    cursor: pointer;
+    user-select: none;
+    transition: filter 0.3s ease-in-out;
+}
+
+.player-controls__button:hover {
+    filter: brightness(80%);
+}
+
+.player-controls__play {
+    font-size: 40px;
+    position: relative;
+    top: 3px;
+    width: 40px; 
 }
 
 @media screen and (max-width: 376px) {
