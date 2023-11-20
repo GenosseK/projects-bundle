@@ -8,8 +8,8 @@ import audio2 from '../../music/jacinto-2.mp3';
 import audio3 from '../../music/jacinto-3.mp3';
 import audio4 from '../../music/metric-1.mp3';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBackward, faForward, faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
-import { createRef, useEffect, useRef, useState } from 'react';
+import { faBackward, faForward, faPause, faPlay, faVolumeMute, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useRef, useState } from 'react';
 
 function MusicPlayer() {
 
@@ -18,6 +18,7 @@ function MusicPlayer() {
     const audioElement = useRef();
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [volume, setVolume] = useState(1);
 
     const songs = [
         { title: 'Electric Chill Machine', artist: 'Jacinto', src: audio1, cover: image1 },
@@ -35,24 +36,24 @@ function MusicPlayer() {
 
     useEffect(() => {
         const audio = audioElement.current;
-    
+
         const updateTime = () => {
             setCurrentTime(audio.currentTime);
         };
-    
+
         const updateDuration = () => {
             setDuration(audio.duration);
         };
-    
+
         audio.addEventListener('timeupdate', updateTime);
         audio.addEventListener('loadedmetadata', updateDuration);
-    
+
         return () => {
             audio.removeEventListener('timeupdate', updateTime);
             audio.removeEventListener('loadedmetadata', updateDuration);
         };
     }, []);
-    
+
     const togglePlay = () => {
         if (isPlaying) {
             audioElement.current.pause();
@@ -75,12 +76,15 @@ function MusicPlayer() {
         setCurrentSongIndex(prevIndex);
     };
 
-    const setProgressBar = e => {
-        const width = e.target.clientWidth;
-        const clickX = e.nativeEvent.offsetX;
+    const setProgressBar = (e) => {
+        const progressBar = e.currentTarget;
+        const clickX = e.clientX - progressBar.getBoundingClientRect().left;
+        const width = progressBar.clientWidth;
         const duration = audioElement.current.duration;
+
         audioElement.current.currentTime = (clickX / width) * duration;
     };
+
 
     function formatTime(time) {
         const minutes = Math.floor(time / 60);
@@ -88,6 +92,87 @@ function MusicPlayer() {
         const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
         return `${minutes}:${formattedSeconds}`;
     }
+
+    const [restoreVolume, setRestoreVolume] = useState(1);
+
+
+    const setVolumeLevel = () => {
+        // Check if the volume is already muted
+        if (volume === 0) {
+            // If muted, restore the previous volume level
+            setVolume(restoreVolume);
+            audioElement.current.volume = restoreVolume;
+        } else {
+            // If not muted, save the current volume level and mute
+            setRestoreVolume(volume);
+            setVolume(0);
+            audioElement.current.volume = 0;
+        }
+    };
+
+    const setVolumeSlider = (e) => {
+        const volumeSliderContainer = e.currentTarget;
+        const clickX = e.clientX - volumeSliderContainer.getBoundingClientRect().left;
+        const width = volumeSliderContainer.clientWidth;
+        const newVolume = clickX / width;
+
+        setVolume(newVolume);
+        audioElement.current.volume = newVolume;
+    };
+
+    const increaseVolume = () => {
+        const newVolume = Math.min(volume + 0.1, 1);
+        setVolume(newVolume);
+        audioElement.current.volume = newVolume;
+    };
+
+    const decreaseVolume = () => {
+        const newVolume = Math.max(volume - 0.1, 0);
+        setVolume(newVolume);
+        audioElement.current.volume = newVolume;
+    };
+
+    const jumpBackward = () => {
+        const newTime = Math.max(currentTime - 5, 0);
+        audioElement.current.currentTime = newTime;
+        setCurrentTime(newTime);
+    };
+
+    const jumpForward = () => {
+        const newTime = Math.min(currentTime + 5, duration);
+        audioElement.current.currentTime = newTime;
+        setCurrentTime(newTime);
+    };
+
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            switch (e.code) {
+                case 'Space':
+                    togglePlay();
+                    break;
+                case 'ArrowUp':
+                    increaseVolume();
+                    break;
+                case 'ArrowDown':
+                    decreaseVolume();
+                    break;
+                case 'ArrowLeft':
+                    jumpBackward();
+                    break;
+                case 'ArrowRight':
+                    jumpForward();
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyPress);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [togglePlay]);
 
     return (
         <main>
@@ -107,9 +192,25 @@ function MusicPlayer() {
                         </div>
                     </div>
                     <div className='player-controls__container'>
-                        <FontAwesomeIcon icon={faBackward} className='player-controls__button player-controls__previous' title='Previous' onClick={playPrevious}></FontAwesomeIcon>
-                        <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className='player-controls__button player-controls__play' title={isPlaying ? 'Pause' : 'Play'} onClick={togglePlay}></FontAwesomeIcon>
-                        <FontAwesomeIcon icon={faForward} className='player-controls__button player-controls__next' title='Next' onClick={playNext}></FontAwesomeIcon>
+                        <div className='track-controls__container'>
+                            <FontAwesomeIcon icon={faBackward} className='player-controls__button player-controls__previous' title='Previous' onClick={playPrevious}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className='player-controls__button player-controls__play' title={isPlaying ? 'Pause' : 'Play'} onClick={togglePlay}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faForward} className='player-controls__button player-controls__next' title='Next' onClick={playNext}></FontAwesomeIcon>
+                        </div>
+                        <div className='volume-control__container'>
+                            <FontAwesomeIcon
+                                icon={volume === 0 ? faVolumeMute : faVolumeUp}
+                                className='volume-control__button'
+                                title='Toggle Volume'
+                                onClick={setVolumeLevel}
+                            />
+                            <div className='volume-slider__container' onClick={setVolumeSlider}>
+                                <div
+                                    className='volume-slider'
+                                    style={{ width: `${volume * 100}%` }}
+                                ></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

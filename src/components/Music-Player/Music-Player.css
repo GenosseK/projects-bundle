@@ -63,9 +63,9 @@
     background: #242323;
     border-radius: 5px;
     height: 100%;
-    width: 0%; /* Make sure it has a width initially */
+    width: 0%;
     transition: width 0.1s linear;
-    cursor: pointer; /* This will show the cursor as a pointer when hovering, indicating it's clickable */
+    cursor: pointer;
 }
 
 .duration-wrapper {
@@ -76,10 +76,13 @@
 }
 
 .player-controls__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     top: -15px;
-    left: 120px;
-    width: 200px;
+    left: 20px;
+    width: 360px;
 }
 
 .player-controls__button {
@@ -98,8 +101,43 @@
 .player-controls__play {
     font-size: 40px;
     position: relative;
-    top: 3px;
-    width: 40px; 
+    width: 40px;
+}
+
+.volume-control__container {
+    display: flex;
+    align-items: center;
+}
+
+.volume-control__button {
+    font-size: 20px;
+    color: rgb(129, 129, 129);
+    margin-right: 10px;
+    cursor: pointer;
+    user-select: none;
+    transition: filter 0.3s ease-in-out;
+}
+
+.volume-slider__container {
+    background: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 4px;
+    width: 80px;
+}
+
+.volume-slider {
+    background: #242323;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    transition: width 0.1s linear;
+}
+
+.track-controls__container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
 }
 
 @media screen and (max-width: 376px) {
