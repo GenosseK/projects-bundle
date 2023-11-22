@@ -1,0 +1,34 @@
+.countdown__container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* This ensures the container takes up the full height of the viewport */
+    overflow: hidden;
+}
+
+.countdown__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* This makes the video cover the entire container */
+}
+
+.video__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* You can adjust the overlay's color and transparency */
+}
+
+
+@media screen and (max-width: 900px) {
+    .countdown__video {
+        object-fit: cover;
+        object-position: 70%;
+    }
+  }
+
+
+
+

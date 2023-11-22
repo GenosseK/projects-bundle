@@ -8,6 +8,7 @@ import DarkLight from '../Dark-Light-Mode/Dark-Light-Mode';
 import AnimatedTemplate from '../Animated-Template/Animated-Template';
 import NavigationNation from '../Navigation-Nation/Navigation-Nation';
 import MusicPlayer from '../Music-Player/Music-Player';
+import CustomCountdown from '../Custom-Countdown/Custom-Countdown';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='animated-template' element={<AnimatedTemplate />} />
         <Route path='navigation-nation' element={<NavigationNation />} />
         <Route path='music-player' element={<MusicPlayer />} />
+        <Route path='custom-countdown' element={<CustomCountdown />} />
       </Routes>
     </div>
   );
