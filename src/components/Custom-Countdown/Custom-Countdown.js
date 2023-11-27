@@ -16,6 +16,8 @@ function CustomCountdown() {
     // State to manage the visibility of different countdown sections
     const [countdownSection, setCountdownSection] = useState('input'); // Possible values: 'input', 'timer', 'complete'
 
+    const today = new Date().toISOString().split('T')[0];
+
     // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -112,6 +114,7 @@ function CustomCountdown() {
                             <input
                                 className='countdown__form_input'
                                 type='date'
+                                min={today}
                                 value={countdownData.date}
                                 onChange={(e) => setCountdownData({ ...countdownData, date: e.target.value })}
                             />
