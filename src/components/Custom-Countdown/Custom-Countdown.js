@@ -10,86 +10,96 @@ function CustomCountdown() {
         days: 0,
         hours: 0,
         minutes: 0,
-        seconds: 0
+        seconds: 0,
     });
 
-    // State to manage the visibility of different countdown sections
-    const [countdownSection, setCountdownSection] = useState('input'); // Possible values: 'input', 'timer', 'complete'
+    const [countdownSection, setCountdownSection] = useState('input');
+    const [countdownActive, setCountdownActive] = useState(false);
 
-    const today = new Date().toISOString().split('T')[0];
+    // const today = new Date().toISOString().split('T')[0];
 
-    // Function to handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Calculate the time remaining based on the selected date
-        const selectedDate = new Date(countdownData.date).getTime();
-        const now = new Date().getTime();
-        const timeRemaining = selectedDate - now;
+    useEffect(() => {
+        const savedCountdown = JSON.parse(localStorage.getItem('countdown'));
+    
+        if (savedCountdown) {
+            setCountdownData((prevCountdownData) => ({
+                ...prevCountdownData,
+                ...savedCountdown,
+            }));
+            setCountdownSection('timer');
+            startCountdown(savedCountdown.date);
+        }
+    }, []);
 
-        // Calculate days, hours, minutes, and seconds
-        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    const startCountdown = (date) => {
+        const countdownValue = new Date(date).getTime();
+    
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = countdownValue - now;
+    
+            if (distance < 0) {
+                setCountdownSection('complete');
+                clearInterval(countdownActive);
+                localStorage.removeItem('countdown');
+            } else {
+                setCountdownData((prevCountdownData) => {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+                    return { ...prevCountdownData, days, hours, minutes, seconds };
+                });
+            }
+        };
 
-        // Update countdown data and switch to the timer section
-        setCountdownData({
-            ...countdownData,
-            days,
-            hours,
-            minutes,
-            seconds
-        });
-        setCountdownSection('timer');
+        updateCountdown();
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        setCountdownActive(countdownInterval);
     };
 
-    // Function to handle new countdown button click
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        if (!countdownData.title || !countdownData.date) {
+            alert('Please fill in all fields.');
+            return;
+        }
+    
+        const selectedDate = new Date(countdownData.date).getTime();
+        const currentDate = new Date().getTime();
+    
+        if (selectedDate < currentDate) {
+            alert('Please select a future date and time.');
+            return;
+        }
+    
+        localStorage.setItem('countdown', JSON.stringify(countdownData));
+        setCountdownSection('timer');
+        startCountdown(countdownData.date);
+    };
+
     const handleNewCountdown = () => {
-        // Reset countdown data and switch to the input section
         setCountdownData({
             title: '',
             date: '',
             days: 0,
             hours: 0,
             minutes: 0,
-            seconds: 0
+            seconds: 0,
         });
         setCountdownSection('input');
+        clearInterval(countdownActive);
+        localStorage.removeItem('countdown');
     };
 
-    useEffect(() => {
-        // Function to update the countdown every second
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const selectedDate = new Date(countdownData.date).getTime();
-            const timeRemaining = selectedDate - now;
-
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-            // Update countdown data
-            setCountdownData({
-                ...countdownData,
-                days,
-                hours,
-                minutes,
-                seconds
-            });
-
-            // If the countdown is finished, switch to the complete section
-            if (timeRemaining < 0) {
-                setCountdownSection('complete');
-            }
-        };
-
-        // Update countdown every second
-        const countdownInterval = setInterval(updateCountdown, 1000);
-
-        // Cleanup interval on component unmount
-        return () => clearInterval(countdownInterval);
-    }, [countdownData]);
+    const getMinDate = () => {
+        const today = new Date().toISOString().slice(0, 16);  // Get the current date in the 'yyyy-mm-ddThh:mm' format
+        return today;
+    };
+    
 
     return (
         <main className='countdown'>
@@ -110,11 +120,11 @@ function CustomCountdown() {
                                 value={countdownData.title}
                                 onChange={(e) => setCountdownData({ ...countdownData, title: e.target.value })}
                             />
-                            <label className='countdown__form_label'>Select a Date</label>
+                            <label className='countdown__form_label'>Select a Date and Time</label>
                             <input
                                 className='countdown__form_input'
-                                type='date'
-                                min={today}
+                                type='datetime-local'
+                                min={getMinDate()}
                                 value={countdownData.date}
                                 onChange={(e) => setCountdownData({ ...countdownData, date: e.target.value })}
                             />
