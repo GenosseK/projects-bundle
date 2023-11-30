@@ -44,8 +44,6 @@
     background: rgba(255, 255, 255, 0.85);
 }
 
-
-
 .countdown__title {
     font-size: 35px;
     text-align: center;
@@ -90,10 +88,6 @@
     filter: brightness(110%);
 }
 
-.countdown__timer_list {
-    margin-left: -45px;
-}
-
 .countdown__timer_item {
     display: inline-block;
     font-size: 30px;
@@ -108,15 +102,9 @@
     text-align: center;
 }
 
-.countdown__complete {
-    position: relative;
-    top: 60px;
-}
-
 .countdown__complete_title {
     animation: complete 4s infinite;
 }
-
 
 @keyframes complete {
     0% {
@@ -129,7 +117,6 @@
 
     50% {
         color: rgb(68, 231, 19);
-        transform: scale(1.5);
     }
 
     75% {
@@ -148,8 +135,7 @@
     }
 }
 
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 604px) {
     .countdown__container {
         min-width: unset;
         width: 95vw;
@@ -169,7 +155,46 @@
     .countdown__title {
         font-size: 20px;
     }
+}
 
+@media screen and (max-width: 572px) {
+    .countdown__timer_item {
+        font-size: 25px;
+    }
 
+    .countdown__timer_item-span {
+        font-size: 50px;
+    }
+}
 
+@media screen and (max-width: 498px) {
+    .countdown__timer_item {
+        font-size: 20px;
+    }
+
+    .countdown__timer_item-span {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 424px) {
+    .countdown__timer_item {
+        font-size: 12px;
+    }
+
+    .countdown__timer_item-span {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .countdown__complete_title {
+        font-size: 1.6em;
+    }
+}
+
+@media screen and (max-width: 336px) {
+    .countdown__form_input {
+        font-size: 0.9rem;
+    }
 }

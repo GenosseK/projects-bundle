@@ -3,7 +3,7 @@ import './Custom-Countdown.css';
 import timeVideo from '../../images/time.mp4';
 
 function CustomCountdown() {
-    // State to manage countdown data
+
     const [countdownData, setCountdownData] = useState({
         title: '',
         date: '',
@@ -16,11 +16,9 @@ function CustomCountdown() {
     const [countdownSection, setCountdownSection] = useState('input');
     const [countdownActive, setCountdownActive] = useState(false);
 
-    // const today = new Date().toISOString().split('T')[0];
-
     useEffect(() => {
         const savedCountdown = JSON.parse(localStorage.getItem('countdown'));
-    
+
         if (savedCountdown) {
             setCountdownData((prevCountdownData) => ({
                 ...prevCountdownData,
@@ -33,11 +31,11 @@ function CustomCountdown() {
 
     const startCountdown = (date) => {
         const countdownValue = new Date(date).getTime();
-    
+
         const updateCountdown = () => {
             const now = new Date().getTime();
             const distance = countdownValue - now;
-    
+
             if (distance < 0) {
                 setCountdownSection('complete');
                 clearInterval(countdownActive);
@@ -48,7 +46,7 @@ function CustomCountdown() {
                     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
+
                     return { ...prevCountdownData, days, hours, minutes, seconds };
                 });
             }
@@ -62,20 +60,20 @@ function CustomCountdown() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         if (!countdownData.title || !countdownData.date) {
             alert('Please fill in all fields.');
             return;
         }
-    
+
         const selectedDate = new Date(countdownData.date).getTime();
         const currentDate = new Date().getTime();
-    
+
         if (selectedDate < currentDate) {
             alert('Please select a future date and time.');
             return;
         }
-    
+
         localStorage.setItem('countdown', JSON.stringify(countdownData));
         setCountdownSection('timer');
         startCountdown(countdownData.date);
@@ -99,7 +97,7 @@ function CustomCountdown() {
         const today = new Date().toISOString().slice(0, 16);  // Get the current date in the 'yyyy-mm-ddThh:mm' format
         return today;
     };
-    
+
 
     return (
         <main className='countdown'>
