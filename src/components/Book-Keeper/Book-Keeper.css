@@ -84,12 +84,15 @@
 
 .bookMark__creator__container {
     background: rgba(0, 0, 0, 0.6);
-
+    display: none;
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
+}
+
+.bookMark__creator__container_open {
+    display: flex;
 }
 
 .creator {
