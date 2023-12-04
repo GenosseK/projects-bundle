@@ -84,15 +84,19 @@
 
 .bookMark__creator__container {
     background: rgba(0, 0, 0, 0.6);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
     inset: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s linear;
 }
 
 .bookMark__creator__container_open {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
 }
 
 .creator {
@@ -140,8 +144,8 @@
 .website__input {
     width: 97%;
     padding: 5px;
-    border: 2px solid 5px;
-    border-radius: #7c59b0;
+    border: 2px solid  #7c59b0;
+    border-radius: 5px;
     display: block;
     outline: none;
 }
