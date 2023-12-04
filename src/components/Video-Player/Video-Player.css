@@ -1,0 +1,196 @@
+.videoPlayer_main {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #e3e3e3;
+    background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234f4f51' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Helvetica, sans-serif;
+}
+
+.videoPlayer {
+    max-width: 80vw;
+    min-width: 800px;
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: black;
+    position: relative;
+    cursor: pointer;
+}
+
+.videoPlayer__icons {
+    color: white;
+    font-size: 35px;
+}
+
+.videoPlyer__video {
+    border-radius: 5px;
+    width: 100%;
+    height: auto;
+}
+
+.videoPlayer__container {
+    width: 100%;
+    height: 30%;
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    cursor: default;
+}
+
+.videoPlayer__video-controls__container {
+    position: absolute;
+    bottom: -5px;
+    width: 100%;
+    height: 95px;
+    margin-top: -95px;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all 0.5s ease-out 2s;
+}
+
+.videoPlayer__container:hover .videoPlayer__video-controls__container {
+    opacity: 1;
+    transition: all 0.2s ease-out;
+}
+
+.video-controls__playback-controls {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.playback-controls__controls-left,
+.playback-controls__controls-right {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    top: 40px;
+}
+
+.video-controls__progress-bar__contaier {
+    height: 8px;
+    width: calc(100% - 30px);
+    background: rgba(202, 202, 202, 0.5);
+    margin: auto;
+    border-radius: 10px;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    cursor: pointer;
+    transition: height 0.1s ease-in-out;
+    z-index: 10;
+}
+
+.video-controls__progress-bar__contaier:hover {
+    height: 10px;
+}
+
+.progress-bar__video-bar {
+    background: dodgerblue;
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+.playback-controls__controls-left {
+    justify-content: flex-start;
+    margin-left: 15px;
+}
+
+.controls-left__play-button__container {
+    margin-right: 15px;
+}
+
+.controls-left__play-button:hover {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.controls-left__volume-button_container {
+    cursor: pointer;
+}
+
+.controls-left__volume-bar__container {
+    height: 8px;
+    width: 100px;
+    background: rgba(70, 70, 70, 0.5);
+    border-radius: 10px;
+    position: relative;
+    top: -21px;
+    left: 50px;
+    cursor: pointer;
+}
+
+.controls-left__volume-bar {
+    background: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.2s ease-in;
+}
+
+.controls-left__volume-bar:hover {
+    background: dodgerblue;
+}
+
+.playback-controls__controls-right {
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+
+.controls-right__player-speed__container,
+.controls-right__video-time__container {
+    position: relative;
+    top: 10px;
+}
+
+.controls-right__player-speed__container {
+    margin-right: 15px;
+}
+
+.player-speed__selector,
+.selector__option {
+    cursor: pointer;
+}
+
+.player-speed__selector {
+    appearance: none;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 18px;
+    position: relative;
+    top: -2.5px;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.player-speed__selector:focus {
+    outline: none;
+}
+
+.player-speed__selector > .selector__option {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: none;
+    font-size: 14px;
+}
+
+.controls-right__video-time__container {
+    margin-right: 15px;
+    color: white;
+    font-weight: bold;
+    user-select: none;
+}
+
+.controls__fullscreen-button__container {
+    cursor: pointer;
+}

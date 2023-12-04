@@ -10,6 +10,7 @@ import NavigationNation from '../Navigation-Nation/Navigation-Nation';
 import MusicPlayer from '../Music-Player/Music-Player';
 import CustomCountdown from '../Custom-Countdown/Custom-Countdown';
 import BookKeeper from '../Book-Keeper/Book-Keeper';
+import VideoPlayer from '../Video-Player/Video-Player';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path='music-player' element={<MusicPlayer />} />
         <Route path='custom-countdown' element={<CustomCountdown />} />
         <Route path='book-keeper' element={<BookKeeper />} />
+        <Route path='video-player' element={<VideoPlayer />} />
       </Routes>
     </div>
   );
