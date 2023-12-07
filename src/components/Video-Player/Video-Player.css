@@ -24,7 +24,7 @@
     font-size: 35px;
 }
 
-.videoPlyer__video {
+.videoPlayer__video {
     border-radius: 5px;
     width: 100%;
     height: auto;
@@ -95,7 +95,7 @@
 
 .progress-bar__video-bar {
     background: dodgerblue;
-    width: 50%;
+    width: 0;
     height: 100%;
     border-radius: 10px;
     transition: all 0.5s ease;
@@ -150,7 +150,7 @@
 .controls-right__player-speed__container,
 .controls-right__video-time__container {
     position: relative;
-    top: 10px;
+
 }
 
 .controls-right__player-speed__container {
@@ -169,16 +169,16 @@
     border: none;
     font-size: 18px;
     position: relative;
-    top: -2.5px;
     border-radius: 5px;
-    padding: 0;
+    top: 2.5px;
 }
 
 .player-speed__selector:focus {
     outline: none;
+    box-shadow: none;
 }
 
-.player-speed__selector > .selector__option {
+.player-speed__selector>.selector__option {
     background-color: rgba(0, 0, 0, 0.9);
     border: none;
     font-size: 14px;
@@ -189,8 +189,110 @@
     color: white;
     font-weight: bold;
     user-select: none;
+    top: 10px;
 }
 
 .controls__fullscreen-button__container {
     cursor: pointer;
+}
+
+.video-fullscreen {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.loading__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.loading__animation {
+    width: 12%;
+    height: 12%;
+}
+
+@media screen and (max-width: 800px) {
+    .videoPlayer {
+        min-width: 0;
+        max-width: 95vw;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .videoPlayer {
+        min-width: 0;
+        max-width: 95vw;
+    }
+
+    .videoPlayer__icons {
+        font-size: 20px;
+    }
+
+    .videoPlayer__video-controls__container {
+        height: 50px;
+    }
+
+    .video-controls__playback-controls {
+        position: relative;
+        top: -25px;
+    }
+
+    .video-controls__progress-bar__contaier {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    }
+
+    .progress-bar__video-bar {
+        border-radius: 0;
+    }
+
+    .controls-left__volume-bar__container {
+        width: 50px;
+        left: 30px;
+        top: -15px;
+    }
+
+
+
+    .player-speed__selector {
+        font-size: 12px;
+        top: 1.5px;
+    }
+
+    .controls-right__video-time__container {
+        font-size: 12px;
+    }
+
+    .controls__fullscreen-button__container {
+        top: 5px;
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 900px) and (max-height: 500px) {
+    .videoPlayer {
+        max-height: 95vh;
+        max-width: auto;
+    }
+
+    .videoPlayer__video {
+        height: 95vh;
+        object-fit: cover;
+    }
+
+    .video-fullscreen {
+        height: 97.5vh;
+        border-radius: 0;
+    }
 }
