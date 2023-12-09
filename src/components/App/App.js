@@ -11,6 +11,7 @@ import MusicPlayer from '../Music-Player/Music-Player';
 import CustomCountdown from '../Custom-Countdown/Custom-Countdown';
 import BookKeeper from '../Book-Keeper/Book-Keeper';
 import VideoPlayer from '../Video-Player/Video-Player';
+import FormValidator from '../Form-Validator/Form-Validator';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='custom-countdown' element={<CustomCountdown />} />
         <Route path='book-keeper' element={<BookKeeper />} />
         <Route path='video-player' element={<VideoPlayer />} />
+        <Route path='form-validator' element={<FormValidator />} />
       </Routes>
     </div>
   );
