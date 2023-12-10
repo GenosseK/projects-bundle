@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import './Form-Validator.css';
 
 function FormValidator() {
+
+   
+    
     return (
         <main className='formValidator'>
             <div className='formValidator__container'>
@@ -42,8 +46,8 @@ function FormValidator() {
 
                 </form>
 
-                <div className='formValidator__success-container'>
-                    <h3 className='formValidator__success__message'>Don't Hesitate!</h3>
+                <div className='formValidator__message-container'>
+                    <h3 className='formValidator__message'>Don't Hesitate!</h3>
                 </div>
 
             </div>
