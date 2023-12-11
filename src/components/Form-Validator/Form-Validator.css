@@ -96,7 +96,27 @@
 
 .formValidator__message {
     font-family: Sen, sans-serif;
-    font-size: 20px;
-    letter-spacing: 2px;
+    font-size: 15px;
+    letter-spacing: 1px;
     font-weight: 600;
 }
+
+.formValidator__message-container--success {
+    border: 1px solid green;
+}
+
+.formValidator__message-container--error {
+    border: 1px solid red;
+}
+
+.password-input-container {
+    position: relative;
+  }
+  
+  .password-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
