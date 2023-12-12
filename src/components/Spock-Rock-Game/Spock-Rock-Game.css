@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+
+
+.spockRockGame {
+    margin: 0;
+    min-height: 100vh;
+    background: whitesmoke;
+    font-family: Lato, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spockRockGame__container {
+    width: 530px;
+    height: 600px;
+    background: white;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.spockRockGame__header__container {
+    background: dodgerblue;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spockRockGame__header {
+    color: white;
+    font-size: 30px;
+}
+
+.spockRockGame__player__container {
+    margin: 50px;
+}
+
+.spockRockGame__player__title {
+    margin-bottom: 20px;
+    font-family: Lato, sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.game__choice {
+    font-size: 50px;
+    margin-right: 40px;
+}
+
+.player__choice,
+.player__choice-title {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+.computer__choice,
+.computer__choice-title {
+    color: rgb(235, 43, 52);
+}
+
+.game__choice:last-of-type {
+    margin-right: 0;
+}
+
+.spockRockGame__reset {
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.spockRockGame__result__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spockRockGame__result__text {
+    font-size: 40px;
+    margin: unset;
+    margin-top: 20px;
+}

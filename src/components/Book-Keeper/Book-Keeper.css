@@ -144,7 +144,7 @@
 .website__input {
     width: 97%;
     padding: 5px;
-    border: 2px solid  #7c59b0;
+    border: 2px solid #7c59b0;
     border-radius: 5px;
     display: block;
     outline: none;
@@ -154,7 +154,6 @@
     cursor: pointer;
     color: white;
     background: #7c59b0;
-    ;
     border: none;
     height: 30px;
     width: 100px;
@@ -168,7 +167,6 @@
 
 .bookMark__creator_submit-button:focus {
     outline: none;
-
 }
 
 

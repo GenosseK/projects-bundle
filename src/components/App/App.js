@@ -12,6 +12,7 @@ import CustomCountdown from '../Custom-Countdown/Custom-Countdown';
 import BookKeeper from '../Book-Keeper/Book-Keeper';
 import VideoPlayer from '../Video-Player/Video-Player';
 import FormValidator from '../Form-Validator/Form-Validator';
+import SpockRockGame from '../Spock-Rock-Game/Spock-Rock-Game';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='book-keeper' element={<BookKeeper />} />
         <Route path='video-player' element={<VideoPlayer />} />
         <Route path='form-validator' element={<FormValidator />} />
+        <Route path='spock-rock-game' element={<SpockRockGame />} />
       </Routes>
     </div>
   );
