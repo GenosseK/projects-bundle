@@ -43,7 +43,7 @@
     margin-bottom: 20px;
     font-family: Lato, sans-serif;
     font-weight: bold;
-    font-size: 50px;
+    font-size: 30px;
 }
 
 .game__choice {
@@ -83,3 +83,75 @@
     margin: unset;
     margin-top: 20px;
 }
+
+.player__choice.selected,
+.computer__choice.selected {
+  color: black !important;
+}
+
+@media screen and (max-width: 540px) {
+    .spockRockGame__container {
+      width: 95%;
+      height: 580px;
+    }
+  
+    .spockRockGame__header {
+      font-size: 24px;
+    }
+  
+    .spockRockGame__player__container {
+      margin: 50px 0 25px 25px;
+    }
+  
+    .game__choice {
+      margin-right: 20px;
+    }
+  
+    .spockRockGame__reset {
+      margin-top: 25px;
+      margin-left: 25px;
+    }
+  }
+  
+  /* Media Query: iPhone (Vertical) */
+  @media screen and (max-width: 376px) {
+    .spockRockGame__container {
+      height: 550px;
+    }
+  
+    .spockRockGame__header {
+      font-size: 22px;
+    }
+  
+    .spockRockGame__player__container {
+      margin: 43px 0 25px 20px;
+    }
+  
+    .game__choice {
+      font-size: 43px;
+    }
+  
+    .spockRockGame__reset {
+      margin-top: 15px;
+    }
+  
+    .spockRockGame__result__container  {
+      margin: 0 20px;
+    }
+  }
+
+  @media screen and (max-width: 340px) {
+  
+    .spockRockGame__header {
+      font-size: 20px;
+    }
+
+    .spockRockGame__player__title {
+        font-size: 26px;
+    }
+  
+    .game__choice {
+      font-size: 37px;
+    }
+  
+  }
