@@ -20,7 +20,7 @@
 
 .nasa-apod__navigation-container {
     position: fixed;
-    top: -20px;
+    top: -15px;
     border-top: 20px solid whitesmoke;
     right: 0;
     width: 100%;
@@ -45,4 +45,78 @@
 
 .nasa-apod__navigation__separator {
     margin: 0 10px;
+}
+
+.nasa-apod__cards-container {
+    width: 800px;
+    margin: 50px auto 0 auto;
+}
+
+.nasa-apod__card {
+    background: white;
+    margin: 10px 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.nasa-apod__card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nasa-apod__card__image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px 5px 0 0;
+}
+
+.nasa-apod__card__body {
+    padding: 20px;
+}
+
+.nato-apod__card__title {
+    margin: 10px auto;
+    font-size: 24px;
+}
+
+.nasa-apod__card__favorites-button {
+    color: dodgerblue;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+}
+
+.nasa-apod__card__favorites-button:hover {
+    color: rgb(0, 99, 199);
+}
+
+.nasa-apod__save-confirmed {
+    background: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    position: fixed;
+    bottom: 25px;
+    right: 50px;
+}
+
+@media screen and (max-width: 800px) {
+    .nasa-apod {
+        line-height: 1.4rem;
+        font-size: 0.9rem;
+        text-align: justify;
+    }
+
+    .nasa-apod__cards-container {
+        width: 100%;
+    }
+
+    .nato-apod__card__title {
+        font-size: 20px;
+    }
+
+    .nasa-apod__save-confirmed {
+        right: 25px;
+    }
 }
