@@ -14,6 +14,7 @@ import VideoPlayer from '../Video-Player/Video-Player';
 import FormValidator from '../Form-Validator/Form-Validator';
 import SpockRockGame from '../Spock-Rock-Game/Spock-Rock-Game';
 import NasaApod from '../NASA-APOD/NASA-APOD';
+import MathSprintGame from '../Math-Sprint-Game/Math-Sprint-Game';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='form-validator' element={<FormValidator />} />
         <Route path='spock-rock-game' element={<SpockRockGame />} />
         <Route path='nasa-apod' element={<NasaApod />} />
+        <Route path='math-sprint-game' element={<MathSprintGame />} />
       </Routes>
     </div>
   );
