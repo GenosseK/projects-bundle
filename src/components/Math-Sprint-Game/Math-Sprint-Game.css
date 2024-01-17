@@ -127,9 +127,29 @@
 }
 
 .mathSprintGame__countdown {
-  margin-top: 45%;
-  font-size: 100px;
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
+    margin-top: 45%;
+    font-size: 100px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.mathSprintGame__equations-container {
+    height: 552px;
+    overflow-y: scroll;
+    position: relative;
+    -ms-overflow-style: none;
+}
+
+.mathSprintGame__equations-container::-webkit-scrollbar {
+    display: none;
+}
+
+.mathSpringGame__equation-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    height: 80px;
+    margin: 0 50px;
+    user-select: none;
 }

@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Math-Sprint-Game.css';
 
 function MathSprintGame() {
 
     const [selectedOption, setSelectedOption] = useState('10');
+    const [showOptionMenu, setShowOptionMenu] = useState(true);
     const [showCountdown, setShowCountdown] = useState(false);
+    const [showGame, setShowGame] = useState(false);
+    const [countdown, setCountdown] = useState('3');
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -12,20 +15,40 @@ function MathSprintGame() {
 
     const handleStartRound = (e) => {
         e.preventDefault();
+        setShowOptionMenu(false);
         setShowCountdown(true);
-
-        
-        setTimeout(() => {
-            console.log('Countdown complete! Start the game.');
-        }, 3000);
     };
+
+    useEffect(() => {
+        if (showCountdown) {
+            let currentCountdown = 3;
+            const countdownInterval = setInterval(() => {
+                setCountdown((prevCountdown) => prevCountdown - 1);
+            }, 1000);
+
+            setTimeout(() => {
+                clearInterval(countdownInterval);
+
+                if (currentCountdown > 0) {
+                    setCountdown('GO!');
+                    setTimeout(() => {
+                        setShowCountdown(false);
+                        setShowGame(true);
+                    }, 1000);
+                }
+            }, 3000);
+
+            return () => clearInterval(countdownInterval);
+        }
+    }, [showCountdown]);
+
 
 
 
     return (
         <main className='mathSprintGame'>
 
-            <div className='mathSprintGame__game-container'>
+            {showOptionMenu && (<div className='mathSprintGame__game-container'>
 
 
                 <div className='mathSprintGame__header-container'>
@@ -67,18 +90,30 @@ function MathSprintGame() {
                                 </span>
                             </div>
 
-                            <div className='mathSprintGame__radio-container'>
+                            <div className={`mathSprintGame__radio-container ${selectedOption === '50' && 'mathSprintGame__radio_label_selected'}`}>
                                 <label className='mathSprintGame__radio_label'>50 Questions</label>
-                                <input className='mathSprintGame__input' type='radio' value='50' />
+                                <input
+                                    className='mathSprintGame__input'
+                                    type='radio'
+                                    value='50'
+                                    checked={selectedOption === '50'}
+                                    onChange={handleOptionChange}
+                                />
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
                                     <span className='mathSprintGame__best-score_value'>0.0s</span>
                                 </span>
                             </div>
 
-                            <div className='mathSprintGame__radio-container'>
+                            <div className={`mathSprintGame__radio-container ${selectedOption === '99' && 'mathSprintGame__radio_label_selected'}`}>
                                 <label className='mathSprintGame__radio_label'>99 Questions</label>
-                                <input className='mathSprintGame__input' type='radio' value='99' />
+                                <input
+                                    className='mathSprintGame__input'
+                                    type='radio'
+                                    value='99'
+                                    checked={selectedOption === '99'}
+                                    onChange={handleOptionChange}
+                                />
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
                                     <span className='mathSprintGame__best-score_value'>0.0s</span>
@@ -95,14 +130,31 @@ function MathSprintGame() {
                 </div>
 
 
-            </div>
+            </div>)}
 
-            <div className='mathSprintGame__game-container mathSprintGame__game-container_hidden'>
-                <div className='mathSprintGame__header-container'>
-                    <h1 className='mathSprintGame__header'>Math Sprint Game</h1>
+            {showCountdown && (
+                <div className='mathSprintGame__game-container'>
+                    <div className='mathSprintGame__header-container'>
+                        <h1 className='mathSprintGame__header'>Math Sprint Game</h1>
+                    </div>
+                    <h1 className='mathSprintGame__countdown'>{countdown}</h1>
                 </div>
-                <h1 className='mathSprintGame__countdown'>3</h1>
-            </div>
+            )}
+
+            {showGame && (
+                <div className='mathSprintGame__game-container'>
+                    <div className='mathSprintGame__header-container'>
+                        <h1 className='mathSprintGame__header'>Math Sprint Game</h1>
+                    </div>
+
+                    <div className='mathSprintGame__equations-container'>
+                        <div className='mathSpringGame__equation-item'>
+                            <h1 className='mathSpringGame__equation'>2 + 2 = 10</h1>
+                        </div>
+                    </div>
+
+                </div>
+            )}
 
 
 
