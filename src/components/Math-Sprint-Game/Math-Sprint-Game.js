@@ -153,6 +153,11 @@ function MathSprintGame() {
                         </div>
                     </div>
 
+                    <div className='mathSprintGame__answer-container'>
+                        <button className='mathSprintGame__answer_wrong mathSprintGame__answer_button'>Wrong</button>
+                        <button className='mathSprintGame__answer_right mathSprintGame__answer_button'>Right</button>
+                    </div>
+
                 </div>
             )}
 

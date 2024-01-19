@@ -153,3 +153,47 @@
     margin: 0 50px;
     user-select: none;
 }
+
+.mathSprintGame__answer-container {
+    width: 100%;
+  height: 90px;
+  background: rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 6px;
+}
+
+.mathSprintGame__answer_button {
+    cursor: pointer;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 25px;
+    font-family: Oxanium, sans-serif;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+.mathSprintGame__answer_button:hover {
+    filter: brightness(110%);
+}
+
+.mathSprintGame__answer_button:active {
+    transform: scale(0.99);
+}
+
+.mathSprintGame__answer_wrong,
+.mathSprintGame__answer_right {
+    width: 40%;
+}
+
+.mathSprintGame__answer_wrong {
+    background: rgb(214, 23, 23);
+  margin-right: 25px;
+}
+
+.mathSprintGame__answer_right {
+    background: rgb(15, 158, 2);
+}
