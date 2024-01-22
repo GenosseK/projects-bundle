@@ -156,13 +156,13 @@
 
 .mathSprintGame__answer-container {
     width: 100%;
-  height: 90px;
-  background: rgba(0, 0, 0, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  top: 6px;
+    height: 90px;
+    background: rgba(0, 0, 0, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 6px;
 }
 
 .mathSprintGame__answer_button {
@@ -191,9 +191,50 @@
 
 .mathSprintGame__answer_wrong {
     background: rgb(214, 23, 23);
-  margin-right: 25px;
+    margin-right: 25px;
 }
 
 .mathSprintGame__answer_right {
     background: rgb(15, 158, 2);
+}
+
+.mathSprintGame__score-container {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mathSprintGame__score-footer {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -30px;
+}
+
+.mathSprintGame__score_title {
+    font-size: 45px;
+}
+
+.mathSprintGame__score_final-time {
+    font-size: 100px;
+    margin: 0;
+    color: rgb(15, 158, 2);
+}
+
+.mathSprintGame__score_base-time {
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+
+.mathSprintGame__score_penalty-time {
+    color: rgb(214, 23, 23);
+}
+
+.mathSprintGame__play-again {
+    width: 90%;
+    background: dodgerblue;
 }
