@@ -2,13 +2,20 @@ import { useEffect, useState } from 'react';
 import './Math-Sprint-Game.css';
 
 function MathSprintGame() {
-    const [selectedOption, setSelectedOption] = useState('10');
+    const [selectedOption, setSelectedOption] = useState(parseInt('10'));
     const [showOptionMenu, setShowOptionMenu] = useState(true);
     const [showCountdown, setShowCountdown] = useState(false);
     const [showGame, setShowGame] = useState(false);
     const [showScore, setShowScore] = useState(false);
     const [countdown, setCountdown] = useState('3');
     const [equationsArray, setEquationsArray] = useState([]);
+    const [playerGuessArray, setPlayerGuessArray] = useState([]);
+    const [timePlayed, setTimePlayed] = useState(0);
+    const [baseTime, setBaseTime] = useState(0);
+    const [penaltyTime, setPenaltyTime] = useState(0);
+    const [finalTime, setFinalTime] = useState(0);
+
+
     const [currentEquationIndex, setCurrentEquationIndex] = useState(0);
     const [timer, setTimer] = useState(0);
 
@@ -21,24 +28,6 @@ function MathSprintGame() {
         setShowOptionMenu(false);
         setShowCountdown(true);
         startCountdown();
-    };
-
-    const handleAnswer = (isCorrect) => {
-        if (isCorrect) {
-            setTimer((prevTimer) => prevTimer + 1);
-        } else {
-            setTimer((prevTimer) => prevTimer + 1);
-            // Penalty for incorrect answer
-        }
-
-        // Move to the next equation
-        setCurrentEquationIndex((prevIndex) => prevIndex + 1);
-
-        // Check if all questions answered
-        if (currentEquationIndex === equationsArray.length - 1) {
-            setShowGame(false);
-            setShowScore(true);
-        }
     };
 
     const startCountdown = () => {
@@ -56,6 +45,7 @@ function MathSprintGame() {
                     setShowCountdown(false);
                     setShowGame(true);
                     createEquations();
+                    startTimer();
                 }, 1000);
             }
         }, 3000);
@@ -90,9 +80,8 @@ function MathSprintGame() {
 
     const createEquations = () => {
         setTimer(0);
-        const questionAmount = parseInt(selectedOption); // Convert selectedOption to an integer
-        const correctEquations = getRandomInt(questionAmount);
-        const wrongEquations = questionAmount - correctEquations;
+        const correctEquations = getRandomInt(selectedOption);
+        const wrongEquations = selectedOption - correctEquations;
 
         for (let i = 0; i < correctEquations; i++) {
             firstNumber = getRandomInt(9);
@@ -119,6 +108,66 @@ function MathSprintGame() {
         shuffle(equationsArray);
         setEquationsArray(equationsArray);
     };
+
+    function showScorePage() {
+        setShowGame(false);
+        setShowScore(true);
+    }
+
+    function scoresToDOM() {
+        const finalTimeDisplay = finalTime.toFixed(1);
+        const baseTimeFormatted = timePlayed.toFixed(1);
+        const penaltyTimeFormatted = penaltyTime.toFixed(1);
+
+        setBaseTime(baseTimeFormatted);
+        setPenaltyTime(penaltyTimeFormatted);
+        setFinalTime(finalTimeDisplay);
+
+        showScorePage();
+    }
+
+    function checkTime() {
+        console.log(timePlayed);
+        clearInterval(timer);
+
+        if (playerGuessArray.length === selectedOption) {
+            // Check for wrong guess, add penaltyTime
+            equationsArray.forEach((equation, index) => {
+                if (equation.evaluated === playerGuessArray[index]) {
+                    // Correct Guess, No Penalty
+                } else {
+                    // Incorrect Guess, Add Penalty
+                    setPenaltyTime(prevPenaltyTime => prevPenaltyTime + 0.5);
+                }
+            });
+
+            // Calculate finalTime
+            setFinalTime(prevFinalTime => prevFinalTime + timePlayed + penaltyTime);
+
+            console.log('time:', timePlayed, 'penalty:', penaltyTime, 'final:', finalTime);
+
+            // Assuming you have a function named scoresToDOM to update the DOM with scores
+            scoresToDOM();
+        }
+    }
+
+
+    function addTime() {
+        setTimePlayed(prevTime => prevTime + 0.1);
+        checkTime();
+    }
+
+    function startTimer() {
+        // Reset times
+        setTimePlayed(0)
+        setPenaltyTime(0)
+        setFinalTime(0)
+        setTimer(setInterval(addTime, 100));
+    }
+
+    function select(guessedTrue) {
+        return guessedTrue ? playerGuessArray.push('true') : playerGuessArray.push('false');
+    }
 
 
     return (
@@ -242,22 +291,22 @@ function MathSprintGame() {
                 </div>
             )}
 
-            {showScore &&(
+            {showScore && (
                 <div className='mathSprintGame__game-container'>
-                <div className='mathSprintGame__header-container'>
-                    <h1 className='mathSprintGame__header'>Math Sprint Game</h1>
-                </div>
+                    <div className='mathSprintGame__header-container'>
+                        <h1 className='mathSprintGame__header'>Math Sprint Game</h1>
+                    </div>
 
-                <div className='mathSprintGame__score-container'>
-                    <h1 className='mathSprintGame__score_title'>Your Time</h1>
-                    <h1 className='mathSprintGame__score_final-time'>2222</h1>
-                    <h1 className='mathSprintGame__score_base-time'>222</h1>
-                    <h1 className='mathSprintGame__score_penalty-time'>222</h1>
-                </div>
+                    <div className='mathSprintGame__score-container'>
+                        <h1 className='mathSprintGame__score_title'>Your Time</h1>
+                        <h1 className='mathSprintGame__score_final-time'>2222</h1>
+                        <h1 className='mathSprintGame__score_base-time'>222</h1>
+                        <h1 className='mathSprintGame__score_penalty-time'>222</h1>
+                    </div>
 
-                <div className='mathSprintGame__score-footer'>
-                    <button className='mathSprintGame__play-again mathSprintGame__answer_button'>Play Again</button>
-                </div>
+                    <div className='mathSprintGame__score-footer'>
+                        <button className='mathSprintGame__play-again mathSprintGame__answer_button'>Play Again</button>
+                    </div>
                 </div>
             )}
 
