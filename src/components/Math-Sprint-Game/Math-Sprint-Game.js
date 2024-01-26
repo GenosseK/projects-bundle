@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Math-Sprint-Game.css';
 
 function MathSprintGame() {
-    const [selectedOption, setSelectedOption] = useState(parseInt('10'));
+    const [selectedOption, setSelectedOption] = useState(10);
     const [showOptionMenu, setShowOptionMenu] = useState(true);
     const [showCountdown, setShowCountdown] = useState(false);
     const [showGame, setShowGame] = useState(false);
@@ -11,16 +11,13 @@ function MathSprintGame() {
     const [equationsArray, setEquationsArray] = useState([]);
     const [playerGuessArray, setPlayerGuessArray] = useState([]);
     const [timePlayed, setTimePlayed] = useState(0);
-    const [baseTime, setBaseTime] = useState(0);
     const [penaltyTime, setPenaltyTime] = useState(0);
     const [finalTime, setFinalTime] = useState(0);
-
-
     const [currentEquationIndex, setCurrentEquationIndex] = useState(0);
     const [timer, setTimer] = useState(0);
 
     const handleOptionChange = (e) => {
-        setSelectedOption(e.target.value);
+        setSelectedOption(parseInt(e.target.value, 10));
     };
 
     const handleStartRound = (e) => {
@@ -114,40 +111,25 @@ function MathSprintGame() {
         setShowScore(true);
     }
 
-    function scoresToDOM() {
-        const finalTimeDisplay = finalTime.toFixed(1);
-        const baseTimeFormatted = timePlayed.toFixed(1);
-        const penaltyTimeFormatted = penaltyTime.toFixed(1);
-
-        setBaseTime(baseTimeFormatted);
-        setPenaltyTime(penaltyTimeFormatted);
-        setFinalTime(finalTimeDisplay);
-
-        showScorePage();
-    }
-
     function checkTime() {
-        console.log(timePlayed);
         clearInterval(timer);
 
         if (playerGuessArray.length === selectedOption) {
+            let newPenaltyTime = 0;
+
             // Check for wrong guess, add penaltyTime
             equationsArray.forEach((equation, index) => {
-                if (equation.evaluated === playerGuessArray[index]) {
-                    // Correct Guess, No Penalty
-                } else {
+                if (equation.evaluated !== playerGuessArray[index]) {
                     // Incorrect Guess, Add Penalty
-                    setPenaltyTime(prevPenaltyTime => prevPenaltyTime + 0.5);
+                    newPenaltyTime += 0.5;
                 }
             });
 
-            // Calculate finalTime
-            setFinalTime(prevFinalTime => prevFinalTime + timePlayed + penaltyTime);
+            // Set penaltyTime and calculate finalTime
+            setPenaltyTime(newPenaltyTime);
+            setFinalTime(timePlayed + newPenaltyTime);
 
-            console.log('time:', timePlayed, 'penalty:', penaltyTime, 'final:', finalTime);
-
-            // Assuming you have a function named scoresToDOM to update the DOM with scores
-            scoresToDOM();
+            showScorePage();
         }
     }
 
@@ -169,6 +151,31 @@ function MathSprintGame() {
         return guessedTrue ? playerGuessArray.push('true') : playerGuessArray.push('false');
     }
 
+    const handleAnswer = (guessedTrue) => {
+        select(guessedTrue); // Add the player's response to the array
+        setCurrentEquationIndex((prevIndex) => prevIndex + 1); // Move to the next equation
+
+        if (currentEquationIndex === selectedOption - 1) {
+            // All questions answered, end the game
+            clearInterval(timer);
+            checkTime();
+        }
+    };
+
+    const playAgain = () => {
+        setEquationsArray([]);
+        setPlayerGuessArray([]);
+        setCountdown('3');
+        setShowOptionMenu(true);
+        setShowScore(false);
+        setCurrentEquationIndex(0);
+        setTimer(0);
+        setTimePlayed(0);
+        setPenaltyTime(0);
+        setFinalTime(0);
+    };
+    
+
 
     return (
         <main className='mathSprintGame'>
@@ -185,13 +192,13 @@ function MathSprintGame() {
                     <form className='mathSprintGame__form' onSubmit={handleStartRound}>
                         <div className='mathSprintGame__selection-container'>
 
-                            <div className={`mathSprintGame__radio-container ${selectedOption === '10' && 'mathSprintGame__radio_label_selected'}`}>
+                            <div className={`mathSprintGame__radio-container ${selectedOption === 10 && 'mathSprintGame__radio_label_selected'}`}>
                                 <label className='mathSprintGame__radio_label'>10 Questions</label>
                                 <input
                                     className='mathSprintGame__input'
                                     type='radio'
                                     value='10'
-                                    checked={selectedOption === '10'}
+                                    checked={selectedOption === 10}
                                     onChange={handleOptionChange}
                                 />
                                 <span className='mathSprintGame__best-score-container'>
@@ -200,13 +207,13 @@ function MathSprintGame() {
                                 </span>
                             </div>
 
-                            <div className={`mathSprintGame__radio-container ${selectedOption === '25' && 'mathSprintGame__radio_label_selected'}`}>
+                            <div className={`mathSprintGame__radio-container ${selectedOption === 25 && 'mathSprintGame__radio_label_selected'}`}>
                                 <label className='mathSprintGame__radio_label'>25 Questions</label>
                                 <input
                                     className='mathSprintGame__input'
                                     type='radio'
                                     value='25'
-                                    checked={selectedOption === '25'}
+                                    checked={selectedOption === 25}
                                     onChange={handleOptionChange}
                                 />
                                 <span className='mathSprintGame__best-score-container'>
@@ -215,13 +222,13 @@ function MathSprintGame() {
                                 </span>
                             </div>
 
-                            <div className={`mathSprintGame__radio-container ${selectedOption === '50' && 'mathSprintGame__radio_label_selected'}`}>
+                            <div className={`mathSprintGame__radio-container ${selectedOption === 50 && 'mathSprintGame__radio_label_selected'}`}>
                                 <label className='mathSprintGame__radio_label'>50 Questions</label>
                                 <input
                                     className='mathSprintGame__input'
                                     type='radio'
                                     value='50'
-                                    checked={selectedOption === '50'}
+                                    checked={selectedOption === 50}
                                     onChange={handleOptionChange}
                                 />
                                 <span className='mathSprintGame__best-score-container'>
@@ -230,13 +237,13 @@ function MathSprintGame() {
                                 </span>
                             </div>
 
-                            <div className={`mathSprintGame__radio-container ${selectedOption === '99' && 'mathSprintGame__radio_label_selected'}`}>
+                            <div className={`mathSprintGame__radio-container ${selectedOption === 99 && 'mathSprintGame__radio_label_selected'}`}>
                                 <label className='mathSprintGame__radio_label'>99 Questions</label>
                                 <input
                                     className='mathSprintGame__input'
                                     type='radio'
                                     value='99'
-                                    checked={selectedOption === '99'}
+                                    checked={selectedOption === 99}
                                     onChange={handleOptionChange}
                                 />
                                 <span className='mathSprintGame__best-score-container'>
@@ -281,10 +288,16 @@ function MathSprintGame() {
                     </div>
 
                     <div className='mathSprintGame__answer-container'>
-                        <button className='mathSprintGame__answer_wrong mathSprintGame__answer_button'>
+                        <button
+                            className='mathSprintGame__answer_wrong mathSprintGame__answer_button'
+                            onClick={() => handleAnswer(false)}
+                        >
                             Wrong
                         </button>
-                        <button className='mathSprintGame__answer_right mathSprintGame__answer_button'>
+                        <button
+                            className='mathSprintGame__answer_right mathSprintGame__answer_button'
+                            onClick={() => handleAnswer(true)}
+                        >
                             Right
                         </button>
                     </div>
@@ -299,13 +312,13 @@ function MathSprintGame() {
 
                     <div className='mathSprintGame__score-container'>
                         <h1 className='mathSprintGame__score_title'>Your Time</h1>
-                        <h1 className='mathSprintGame__score_final-time'>2222</h1>
-                        <h1 className='mathSprintGame__score_base-time'>222</h1>
-                        <h1 className='mathSprintGame__score_penalty-time'>222</h1>
+                        <h1 className='mathSprintGame__score_final-time'>{finalTime.toFixed(1)}</h1>
+                        <h1 className='mathSprintGame__score_base-time'>{timePlayed.toFixed(1)}</h1>
+                        <h1 className='mathSprintGame__score_penalty-time'>{penaltyTime.toFixed(1)}</h1>
                     </div>
 
                     <div className='mathSprintGame__score-footer'>
-                        <button className='mathSprintGame__play-again mathSprintGame__answer_button'>Play Again</button>
+                        <button className='mathSprintGame__play-again mathSprintGame__answer_button' onClick={playAgain}>Play Again</button>
                     </div>
                 </div>
             )}
