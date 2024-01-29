@@ -16,6 +16,40 @@ function MathSprintGame() {
     const [currentEquationIndex, setCurrentEquationIndex] = useState(0);
     const [timer, setTimer] = useState(0);
 
+    const [bestScores, setBestScores] = useState({
+        10: null,
+        25: null,
+        50: null,
+        99: null,
+    });
+      
+      function updateBestScore() {
+        setBestScores((prevBestScores) => {
+            // Use a callback to get the latest finalTime
+            const updatedScores = {
+                ...prevBestScores,
+                [selectedOption]: timePlayed + penaltyTime,
+            };
+    
+            // Save to Local Storage
+            const updatedBestScores = JSON.stringify(updatedScores);
+            localStorage.setItem('bestScores', updatedBestScores);
+    
+            return updatedScores;
+        });
+    }
+    
+    
+
+      useEffect(() => {
+        const storedBestScores = localStorage.getItem('bestScores');
+        if (storedBestScores) {
+          setBestScores(JSON.parse(storedBestScores));
+        }
+      }, []);
+      
+      
+
     const handleOptionChange = (e) => {
         setSelectedOption(parseInt(e.target.value, 10));
     };
@@ -107,6 +141,7 @@ function MathSprintGame() {
     };
 
     function showScorePage() {
+        
         setShowGame(false);
         setShowScore(true);
     }
@@ -129,10 +164,28 @@ function MathSprintGame() {
             setPenaltyTime(newPenaltyTime);
             setFinalTime(timePlayed + newPenaltyTime);
 
+             setBestScores((prevBestScores) => {
+            // Use a callback to get the latest finalTime
+            const updatedScores = {
+                ...prevBestScores,
+                [selectedOption]: prevBestScores[selectedOption] === null || timePlayed+newPenaltyTime < prevBestScores[selectedOption]
+                    ? timePlayed+newPenaltyTime
+                    : prevBestScores[selectedOption],
+            };
+
+            // Save to Local Storage
+            const updatedBestScores = JSON.stringify(updatedScores);
+            localStorage.setItem('bestScores', updatedBestScores);
+
+            return updatedScores;
+        });
+
             showScorePage();
+            
         }
     }
-
+    
+    
 
     function addTime() {
         setTimePlayed(prevTime => prevTime + 0.1);
@@ -203,7 +256,7 @@ function MathSprintGame() {
                                 />
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
-                                    <span className='mathSprintGame__best-score_value'>0.0s</span>
+                                    <span className='mathSprintGame__best-score_value'>{bestScores[10] !== null ? bestScores[10].toFixed(1) + 's' : '0.0s'}</span>
                                 </span>
                             </div>
 
@@ -218,7 +271,8 @@ function MathSprintGame() {
                                 />
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
-                                    <span className='mathSprintGame__best-score_value'>0.0s</span>
+                                    <span className='mathSprintGame__best-score_value'>{bestScores[25] !== null ? bestScores[25].toFixed(1) + 's' : '0.0s'}
+</span>
                                 </span>
                             </div>
 
@@ -233,7 +287,8 @@ function MathSprintGame() {
                                 />
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
-                                    <span className='mathSprintGame__best-score_value'>0.0s</span>
+                                    <span className='mathSprintGame__best-score_value'>{bestScores[50] !== null ? bestScores[50].toFixed(1) + 's' : '0.0s'}
+</span>
                                 </span>
                             </div>
 
@@ -248,7 +303,8 @@ function MathSprintGame() {
                                 />
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
-                                    <span className='mathSprintGame__best-score_value'>0.0s</span>
+                                    <span className='mathSprintGame__best-score_value'>{bestScores[99] !== null ? bestScores[99].toFixed(1) + 's' : '0.0s'}
+</span>
                                 </span>
                             </div>
 
