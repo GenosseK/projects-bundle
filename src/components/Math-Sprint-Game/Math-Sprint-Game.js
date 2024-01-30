@@ -15,6 +15,10 @@ function MathSprintGame() {
     const [finalTime, setFinalTime] = useState(0);
     const [currentEquationIndex, setCurrentEquationIndex] = useState(0);
     const [timer, setTimer] = useState(0);
+    const [activeEquationIndex, setActiveEquationIndex] = useState(0);
+    const [showPlayAgainButton, setShowPlayAgainButton] = useState(false);
+
+
 
     const [bestScores, setBestScores] = useState({
         10: null,
@@ -22,33 +26,13 @@ function MathSprintGame() {
         50: null,
         99: null,
     });
-      
-      function updateBestScore() {
-        setBestScores((prevBestScores) => {
-            // Use a callback to get the latest finalTime
-            const updatedScores = {
-                ...prevBestScores,
-                [selectedOption]: timePlayed + penaltyTime,
-            };
-    
-            // Save to Local Storage
-            const updatedBestScores = JSON.stringify(updatedScores);
-            localStorage.setItem('bestScores', updatedBestScores);
-    
-            return updatedScores;
-        });
-    }
-    
-    
 
-      useEffect(() => {
+    useEffect(() => {
         const storedBestScores = localStorage.getItem('bestScores');
         if (storedBestScores) {
-          setBestScores(JSON.parse(storedBestScores));
+            setBestScores(JSON.parse(storedBestScores));
         }
-      }, []);
-      
-      
+    }, []);
 
     const handleOptionChange = (e) => {
         setSelectedOption(parseInt(e.target.value, 10));
@@ -111,6 +95,7 @@ function MathSprintGame() {
 
     const createEquations = () => {
         setTimer(0);
+        setActiveEquationIndex(0);
         const correctEquations = getRandomInt(selectedOption);
         const wrongEquations = selectedOption - correctEquations;
 
@@ -141,9 +126,13 @@ function MathSprintGame() {
     };
 
     function showScorePage() {
-        
+
         setShowGame(false);
         setShowScore(true);
+
+        setTimeout(() => {
+            setShowPlayAgainButton(true);
+        }, 2000);
     }
 
     function checkTime() {
@@ -164,28 +153,26 @@ function MathSprintGame() {
             setPenaltyTime(newPenaltyTime);
             setFinalTime(timePlayed + newPenaltyTime);
 
-             setBestScores((prevBestScores) => {
-            // Use a callback to get the latest finalTime
-            const updatedScores = {
-                ...prevBestScores,
-                [selectedOption]: prevBestScores[selectedOption] === null || timePlayed+newPenaltyTime < prevBestScores[selectedOption]
-                    ? timePlayed+newPenaltyTime
-                    : prevBestScores[selectedOption],
-            };
+            setBestScores((prevBestScores) => {
+                const updatedScores = {
+                    ...prevBestScores,
+                    [selectedOption]: prevBestScores[selectedOption] === null || timePlayed + newPenaltyTime < prevBestScores[selectedOption]
+                        ? timePlayed + newPenaltyTime
+                        : prevBestScores[selectedOption],
+                };
 
-            // Save to Local Storage
-            const updatedBestScores = JSON.stringify(updatedScores);
-            localStorage.setItem('bestScores', updatedBestScores);
+                const updatedBestScores = JSON.stringify(updatedScores);
+                localStorage.setItem('bestScores', updatedBestScores);
 
-            return updatedScores;
-        });
+                return updatedScores;
+            });
 
             showScorePage();
-            
+
         }
     }
-    
-    
+
+
 
     function addTime() {
         setTimePlayed(prevTime => prevTime + 0.1);
@@ -207,13 +194,21 @@ function MathSprintGame() {
     const handleAnswer = (guessedTrue) => {
         select(guessedTrue); // Add the player's response to the array
         setCurrentEquationIndex((prevIndex) => prevIndex + 1); // Move to the next equation
+        setActiveEquationIndex((prevIndex) => prevIndex + 1);
 
         if (currentEquationIndex === selectedOption - 1) {
             // All questions answered, end the game
             clearInterval(timer);
             checkTime();
+        } else {
+            // Scroll to the next equation
+            const nextEquationElement = document.getElementById(`equation-${currentEquationIndex + 1}`);
+            if (nextEquationElement) {
+                nextEquationElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
     };
+
 
     const playAgain = () => {
         setEquationsArray([]);
@@ -222,12 +217,14 @@ function MathSprintGame() {
         setShowOptionMenu(true);
         setShowScore(false);
         setCurrentEquationIndex(0);
+        setActiveEquationIndex(0);
         setTimer(0);
         setTimePlayed(0);
         setPenaltyTime(0);
         setFinalTime(0);
+        setShowPlayAgainButton(false);
     };
-    
+
 
 
     return (
@@ -272,7 +269,7 @@ function MathSprintGame() {
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
                                     <span className='mathSprintGame__best-score_value'>{bestScores[25] !== null ? bestScores[25].toFixed(1) + 's' : '0.0s'}
-</span>
+                                    </span>
                                 </span>
                             </div>
 
@@ -288,7 +285,7 @@ function MathSprintGame() {
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
                                     <span className='mathSprintGame__best-score_value'>{bestScores[50] !== null ? bestScores[50].toFixed(1) + 's' : '0.0s'}
-</span>
+                                    </span>
                                 </span>
                             </div>
 
@@ -304,7 +301,7 @@ function MathSprintGame() {
                                 <span className='mathSprintGame__best-score-container'>
                                     <span className='mathSprintGame__best-score_title'>Best Score</span>
                                     <span className='mathSprintGame__best-score_value'>{bestScores[99] !== null ? bestScores[99].toFixed(1) + 's' : '0.0s'}
-</span>
+                                    </span>
                                 </span>
                             </div>
 
@@ -337,7 +334,11 @@ function MathSprintGame() {
 
                     <div className='mathSprintGame__equations-container'>
                         {equationsArray.map((equation, index) => (
-                            <div key={index} className='mathSpringGame__equation-item'>
+                            <div
+                                key={index}
+                                id={`equation-${index}`}
+                                className={`mathSpringGame__equation-item ${index === activeEquationIndex ? 'active-equation' : ''}`}
+                            >
                                 <h1 className='mathSpringGame__equation'>{equation.value}</h1>
                             </div>
                         ))}
@@ -374,7 +375,11 @@ function MathSprintGame() {
                     </div>
 
                     <div className='mathSprintGame__score-footer'>
-                        <button className='mathSprintGame__play-again mathSprintGame__answer_button' onClick={playAgain}>Play Again</button>
+                        {showPlayAgainButton && (
+                            <button className='mathSprintGame__play-again mathSprintGame__answer_button' onClick={playAgain}>
+                                Play Again
+                            </button>
+                        )}
                     </div>
                 </div>
             )}

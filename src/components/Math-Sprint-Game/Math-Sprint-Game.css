@@ -238,3 +238,9 @@
     width: 90%;
     background: dodgerblue;
 }
+
+.active-equation {
+    background-color: rgb(130, 193, 255);
+    margin: 0;
+    padding: 0 50px;
+}
