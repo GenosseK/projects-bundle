@@ -15,6 +15,7 @@ import FormValidator from '../Form-Validator/Form-Validator';
 import SpockRockGame from '../Spock-Rock-Game/Spock-Rock-Game';
 import NasaApod from '../NASA-APOD/NASA-APOD';
 import MathSprintGame from '../Math-Sprint-Game/Math-Sprint-Game';
+import DragAndDrop from '../Drag-and-Drop/Drag-and-Drop';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path='spock-rock-game' element={<SpockRockGame />} />
         <Route path='nasa-apod' element={<NasaApod />} />
         <Route path='math-sprint-game' element={<MathSprintGame />} />
+        <Route path='drag-and-drop' element={<DragAndDrop />} />
       </Routes>
     </div>
   );

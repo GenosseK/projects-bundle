@@ -370,8 +370,8 @@ function MathSprintGame() {
                     <div className='mathSprintGame__score-container'>
                         <h1 className='mathSprintGame__score_title'>Your Time</h1>
                         <h1 className='mathSprintGame__score_final-time'>{finalTime.toFixed(1)}</h1>
-                        <h1 className='mathSprintGame__score_base-time'>{timePlayed.toFixed(1)}</h1>
-                        <h1 className='mathSprintGame__score_penalty-time'>{penaltyTime.toFixed(1)}</h1>
+                        <h1 className='mathSprintGame__score_base-time'>Base Time: {timePlayed.toFixed(1)}</h1>
+                        <h1 className='mathSprintGame__score_penalty-time'>Penalty: +{penaltyTime.toFixed(1)}</h1>
                     </div>
 
                     <div className='mathSprintGame__score-footer'>
