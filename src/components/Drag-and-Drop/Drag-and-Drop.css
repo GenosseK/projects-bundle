@@ -53,7 +53,7 @@
     background-color: #248224;
 }
 
-.drag-column__on-hold-header-container {
+.drag-column__onHold-header-container {
     background-color: #a22d22;
 }
 
@@ -111,6 +111,8 @@
     line-height: 1.5rem;
     letter-spacing: 1px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
 }
 
 .drag-item:focus {
@@ -200,11 +202,11 @@
     background-color: #248224;
 }
 
-.drag-column__add-btn_solid_on-hold {
+.drag-column__add-btn_solid_onHold {
     background-color: #a22d22;
 }
 
-.drag-column__add-btn_solid_on-hold:hover {
+.drag-column__add-btn_solid_onHold:hover {
     background-color: #a22d22;
 }
 
@@ -212,4 +214,18 @@
     transition: unset;
     filter: brightness(95%);
     color: white;
+}
+
+.delete-button {
+    display: none;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 5px;
+}
+
+.drag-item:hover .delete-button {
+    display: inline-block;
 }
