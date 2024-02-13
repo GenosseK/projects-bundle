@@ -151,7 +151,7 @@
     font-size: 1.5rem;
     margin-right: 5px;
     position: relative;
-    top: -3px;
+    top: 1px;
 }
 
 .drag-column__add-container {
@@ -228,4 +228,20 @@
 
 .drag-item:hover .delete-button {
     display: inline-block;
+}
+
+.backlog-column {
+    background-color: rgba(162, 98, 45, 0.9);
+}
+
+.progress-column {
+    background-color: rgba(27, 97, 97, 0.9);
+}
+
+.complete-column {
+    background-color: rgba(36, 130, 36, 0.9);
+}
+
+.onHold-column {
+    background-color: rgba(162, 45, 34, 0.9);
 }
