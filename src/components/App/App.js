@@ -17,6 +17,7 @@ import NasaApod from '../NASA-APOD/NASA-APOD';
 import MathSprintGame from '../Math-Sprint-Game/Math-Sprint-Game';
 import DragAndDrop from '../Drag-and-Drop/Drag-and-Drop';
 import Calculator from '../Calculator/Calculator';
+import SplashPage from '../Splash-Page/Splash-Page';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path='math-sprint-game' element={<MathSprintGame />} />
         <Route path='drag-and-drop' element={<DragAndDrop />} />
         <Route path='calculator' element={<Calculator />} />
+        <Route path='splash-page' element={<SplashPage />} />
       </Routes>
     </div>
   );

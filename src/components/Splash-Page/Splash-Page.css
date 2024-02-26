@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.splashPage {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: Lato, sans-serif;
+    color: #54575A;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F3F8F7 49.91%, #FFF9F5 94.19%);
+}
+
+.splashPage__container {
+    position: relative;
+    width: 1440px;
+    height: 1379px;
+    margin: auto;
+}
+
+.splashPage__brand-img {
+    position: absolute;
+    width: 193px;
+    height: 47.64px;
+    left: 221px;
+    top: 50.25px;
+}
+
+.splashPage__title {
+    position: absolute;
+    width: 458px;
+    height: 135px;
+    left: 221px;
+    top: 236px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 67px;
+}
+
+.splashPage__text {
+    position: absolute;
+    width: 394px;
+    height: 96px;
+    left: 221px;
+    top: 403px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 32px;
+}
+
+.splashPage__app-store-btn {
+    position: absolute;
+    width: 138.44px;
+    height: 46.28px;
+    left: 221px;
+    top: 531px;
+}
+
+.splashPage__app-store-btn_image {
+    width: 138.44px;
+    height: 46.28px;
+}
+
+.splashPage__google-play-btn {
+    position: absolute;
+    width: 158.19px;
+    height: 48.28px;
+    left: 381.81px;
+    top: 531px;
+}
+
+.splashPage__google-play-btn_image {
+    width: 158.19px;
+    height: 48.28px;
+}
+
+.splashPage__main-image-container {
+    position: absolute;
+    width: 535.72px;
+    height: 309.27px;
+    left: 683.28px;
+    top: 229.73px;
+}
+
+.splashPage__main-image {
+    height: 411.15px;
+}
+
+.splashPage__profile-img {
+    position: absolute;
+    height: 444px;
+    left: 737px;
+    right: 479px;
+    top: 686px;
+}
+
+.splashPage__orders-img {
+    position: absolute;
+    height: 470px;
+    left: 479px;
+    right: 737px;
+    top: 913px;
+}
+
+.splashPage__home-img {
+    position: absolute;
+    height: 470px;
+    left: 995px;
+    right: 221px;
+    top: 908px;
+}
+
+.splashPage__cart-img {
+    position: absolute;
+    height: 222px;
+    left: 221px;
+    right: 995px;
+    top: 1157px;
+}
+
+.splashPage__product-img {
+    position: absolute;
+    height: 222px;
+    left: 737px;
+    right: 479px;
+    top: 1157px;
+}
+
+.splashPage__background-toggles {
+    position: absolute;
+    right: 150px;
+    top: 70px;
+    display: flex;
+}
+
+.splashPage__background-1 {
+    background-color: #f2f2f2;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23cacaca' fill-opacity='0.3' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.splashPage__background-2 {
+    background: #ADA996;
+    background: -webkit-linear-gradient(to bottom, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+    background: linear-gradient(to bottom, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+}
+
+.splashPage__background-3 {
+    background: #8e9eab;
+    background: -webkit-linear-gradient(to bottom, #eef2f3, #8e9eab);
+    background: linear-gradient(to bottom, #eef2f3, #8e9eab);
+}

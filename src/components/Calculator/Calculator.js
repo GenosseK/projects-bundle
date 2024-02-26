@@ -72,10 +72,10 @@ function Calculator() {
                 handleOperatorClick(key);
             } else if (key === 'Enter') {
                 handleOperatorClick('=');
-            } else if (key === 'Escape') {
+            } else if (key === 'Escape' || key === 'Backspace' || key === 'Delete') {
                 handleClearClick();
             }
-        };
+        };        
 
         window.addEventListener('keydown', handleKeyDown);
 
