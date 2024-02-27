@@ -8,18 +8,26 @@ import OrdersMockup from '../../images/orders.png';
 import HomeMockup from '../../images/home.png';
 import CartMockup from '../../images/cart.png';
 import ProductMockup from '../../images/product.png';
+import { useState } from 'react';
 
 function SplashPage() {
+
+    const [background, setBackground] = useState('');
+
+    const changeBackground = (number) => {
+        setBackground(`background-${number}`);
+    };
+
     return (
-        <main className='splashPage'>
+        <main className={`splashPage ${background}`}>
             <div className='splashPage__container'>
 
                 <img src={HabitualLogo} alt='Habituial Logo' className='splashPage__brand-img' />
 
                 <div className='splashPage__background-toggles' title='Change Background'>
-                    <div className='splashPage__background-1'></div>
-                    <div className='splashPage__background-2'></div>
-                    <div className='splashPage__background-3'></div>
+                    <div className='splashPage__background-1' onClick={() => changeBackground(1)}></div>
+                    <div className='splashPage__background-2' onClick={() => changeBackground(2)}></div>
+                    <div className='splashPage__background-3' onClick={() => changeBackground(3)}></div>
                 </div>
 
                 <div className='splashPage__text-container'>
