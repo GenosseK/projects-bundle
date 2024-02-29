@@ -44,8 +44,6 @@ function BookKeeper() {
     const storeBookmark = (e) => {
         e.preventDefault();
     
-        
-    
         let newUrl = websiteUrl.trim();
         
         if (!newUrl.match(/^(https?:\/\/)/i)) {
