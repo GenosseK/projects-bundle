@@ -142,7 +142,7 @@ function PaintClone() {
             <div className='PaintClone__top-bar'>
 
                 <div className='PaintClone__active-tool'>
-                <span className='PaintClone__active-tool_text' title='Active Tool'>
+                    <span className='PaintClone__active-tool_text' title='Active Tool'>
                         {message ? message : (currentTool === 'eraser' ? 'Eraser' : (currentTool === 'brush' ? 'Brush' : ''))}
                     </span>
                 </div>
