@@ -101,6 +101,9 @@ function PaintClone() {
                 setTimeout(() => setMessage(''), 2000);
             };
             img.src = savedCanvas;
+        } else {
+            setMessage('No Saved Canvas');
+            setTimeout(() => setMessage(''), 2000);
         }
     };
 
@@ -120,6 +123,16 @@ function PaintClone() {
     const handleClearLocalStorage = () => {
         localStorage.removeItem('savedCanvas');
         setMessage('Saved Canvas Cleared');
+        setTimeout(() => setMessage(''), 2000);
+    };
+
+    const handleClearCanvas = () => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        context.fillStyle = 'white';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        setAppliedCanvasColor('white')
+        setMessage('Canvas Cleared');
         setTimeout(() => setMessage(''), 2000);
     };
 
@@ -151,7 +164,7 @@ function PaintClone() {
                 </div>
 
                 <div className='PaintClone__tool'>
-                    <FontAwesomeIcon icon={faUndoAlt} title='Step Back' className='PaintClone__icon PaintClone__undo-alt' />
+                    <FontAwesomeIcon icon={faUndoAlt} title='Clear' className='PaintClone__icon PaintClone__undo-alt' onClick={handleClearCanvas} />
                 </div>
 
                 <div className='PaintClone__tool'>
