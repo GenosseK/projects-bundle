@@ -19,6 +19,7 @@ import DragAndDrop from '../Drag-and-Drop/Drag-and-Drop';
 import Calculator from '../Calculator/Calculator';
 import SplashPage from '../Splash-Page/Splash-Page';
 import PaintClone from '../Paint-Clone/Paint-Clone';
+import Pong from '../Pong/Pong';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path='calculator' element={<Calculator />} />
         <Route path='splash-page' element={<SplashPage />} />
         <Route path='paint-clone' element={<PaintClone />} />
+        <Route path='pong' element={<Pong />} />
       </Routes>
     </div>
   );
