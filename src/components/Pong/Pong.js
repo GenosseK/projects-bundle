@@ -9,6 +9,11 @@ function Pong() {
     const width = 500;
     const height = 700;
 
+    const screenWidth = window.screen.width;
+
+    const canvasPosition = window.innerWidth / 2 - width / 2;
+
+
     const paddleHeight = 10;
     const paddleWidth = 50;
     const paddleDiff = 25;
@@ -138,14 +143,73 @@ function Pong() {
             }
         }
     }
-    
 
+    function computerAI() {
+        if (playerMoved) {
+            if (paddleTopX + paddleDiff < ballX) {
+                setPaddleTopX(prevPaddleTopX => prevPaddleTopX + computerSpeed);
+
+            } else {
+                setPaddleTopX(prevPaddleTopX => prevPaddleTopX - computerSpeed);
+            }
+        }
+    }
+
+    function gameOver() {
+        if (playerScore === winningScore || computerScore === winningScore) {
+            setIsGameOver(true);
+            // Set Winner
+            const winner = playerScore === winningScore ? 'Player 1' : 'Computer';
+            //showGameOverEl(winner);
+        }
+    }
+
+    function animate() {
+        renderCanvas();
+        ballMove();
+        ballBoundaries();
+        computerAI();
+        gameOver();
+        if (!isGameOver) {
+            window.requestAnimationFrame(animate);
+        }
+    }
+
+    function startGame() {
+        setIsGameOver(false);
+        setIsNewGame(false);
+        setPlayerScore(0);
+        setComputerScore(0);
+        ballReset();
+        createCanvas();
+        animate();
+
+        canvasRef.current.addEventListener('mousemove', (e) => {
+            setPlayerMoved(true);
+            console.log("Mouse moved!");
+            console.log("Mouse X:", e.clientX);
+            console.log("Canvas Position:", canvasPosition);
+            console.log("Paddle Diff:", paddleDiff);
+            const newPaddleBottomX = e.clientX - canvasPosition - paddleDiff;
+            if (newPaddleBottomX < paddleDiff) {
+                setPaddleBottomX(0);
+            } else if (newPaddleBottomX > width - paddleWidth) {
+                setPaddleBottomX(width - paddleWidth);
+            } else {
+                console.log("New Paddle Bottom X:", newPaddleBottomX);
+                setPaddleBottomX(newPaddleBottomX);
+            }
+            canvasRef.current.style.cursor = 'none';
+        });
+        
+
+    }
 
     useEffect(() => {
 
-        createCanvas();
+        startGame();
 
-    }, [])
+    }, [ ])
 
     return (
         <main className='pong'>
