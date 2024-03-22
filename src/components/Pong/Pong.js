@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import './Pong.css';
 
 function Pong() {
-
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
 
@@ -13,34 +12,36 @@ function Pong() {
 
     const canvasPosition = window.innerWidth / 2 - width / 2;
 
-
     const paddleHeight = 10;
     const paddleWidth = 50;
     const paddleDiff = 25;
-    const [paddleBottomX, setPaddleBottomX] = useState(225);
-    const [paddleTopX, setPaddleTopX] = useState(225);
-    const [playerMoved, setPlayerMoved] = useState(false);
-    const [paddleContact, setPaddleContact] = useState(false);
 
-    const [ballX, setBallX] = useState(250);
-    const [ballY, setBallY] = useState(350);
+    let paddleBottomX = 225;
+    let paddleTopX = 225;
+    let playerMoved = false;
+    let paddleContact = false;
+
+    let ballX = 250;
+    let ballY = 350;
     const ballRadius = 5;
 
-    const [speedY, setSpeedY] = useState(null);
-    const [speedX, setSpeedX] = useState(null);
-    const [trajectoryX, setTrajectoryX] = useState(null);
-    const [computerSpeed, setComputerSpeed] = useState(null);
+    let speedY = -1;
+    let speedX = 0;
+    let trajectoryX = 0;
+    let computerSpeed = 3;
 
-    const [playerScore, setPlayerScore] = useState(0);
-    const [computerScore, setComputerScore] = useState(0);
+    let playerScore = 0;
+    let computerScore = 0;
     const winningScore = 7;
-    const [isGameOver, setIsGameOver] = useState(true);
-    const [isNewGame, setIsNewGame] = useState(true);
+    let isGameOver = true;
+    let isNewGame = true;
 
+    
 
     function renderCanvas() {
         const canvas = canvasRef.current;
         const context = contextRef.current;
+
         context.fillStyle = 'black';
         context.fillRect(0, 0, width, height);
 
@@ -77,51 +78,51 @@ function Pong() {
     }
 
     function ballReset() {
-        setBallX(width / 2);
-        setBallY(height / 2);
-        setSpeedY(-3);
-        setPaddleContact(false);
+        ballX = width / 2;
+        ballY = height / 2;
+        speedY = -3;
+        paddleContact = false;
     }
 
     function ballMove() {
         // Vertical Speed
-        setBallY(prevBallY => prevBallY - speedY);
+        ballY -= speedY;
 
         // Horizontal Speed
         if (playerMoved && paddleContact) {
-            setBallX(prevBallX => prevBallX + speedX);
+            ballX += speedX;
         }
     }
 
     function ballBoundaries() {
         // Bounce off Left Wall
         if (ballX < 0 && speedX < 0) {
-            setSpeedX(prevSpeedX => -prevSpeedX);
+            speedX = -speedX;
         }
         // Bounce off Right Wall
         if (ballX > width && speedX > 0) {
-            setSpeedX(prevSpeedX => -prevSpeedX);
+            speedX = -speedX;
         }
         // Bounce off player paddle (bottom)
         if (ballY > height - paddleDiff) {
             if (ballX > paddleBottomX && ballX < paddleBottomX + paddleWidth) {
-                setPaddleContact(true);
+                paddleContact = true;
                 // Add Speed on Hit
                 if (playerMoved) {
-                    setSpeedY(prevSpeedY => prevSpeedY - 1);
+                    speedY -= 1;
                     // Max Speed
                     if (speedY < -5) {
-                        setSpeedY(-5);
-                        setComputerSpeed(6);
+                        speedY = -5;
+                        computerSpeed = 6;
                     }
                 }
-                setSpeedY(prevSpeedY => -prevSpeedY);
-                setTrajectoryX(ballX - (paddleBottomX + paddleDiff));
-                setSpeedX(prevSpeedX => prevSpeedX * 0.3);
+                speedY = -speedY;
+                trajectoryX = ballX - (paddleBottomX + paddleDiff);
+                speedX = trajectoryX * 0.3;
             } else if (ballY > height) {
                 // Reset Ball, add to Computer Score
                 ballReset();
-                setComputerScore(prevComputerScore => prevComputerScore + 1);
+                computerScore++;
             }
         }
         // Bounce off computer paddle (top)
@@ -129,17 +130,17 @@ function Pong() {
             if (ballX > paddleTopX && ballX < paddleTopX + paddleWidth) {
                 // Add Speed on Hit
                 if (playerMoved) {
-                    setSpeedY(prevSpeedY => prevSpeedY + 1);
+                    speedY += 1;
                     // Max Speed
                     if (speedY > 5) {
-                        setSpeedY(5);
+                        speedY = 5;
                     }
                 }
-                setSpeedY(prevSpeedY => -prevSpeedY);
+                speedY = -speedY;
             } else if (ballY < 0) {
                 // Reset Ball, add to Player Score
                 ballReset();
-                setPlayerScore(prevPlayerScore => prevPlayerScore + 1);
+                playerScore++;
             }
         }
     }
@@ -147,20 +148,80 @@ function Pong() {
     function computerAI() {
         if (playerMoved) {
             if (paddleTopX + paddleDiff < ballX) {
-                setPaddleTopX(prevPaddleTopX => prevPaddleTopX + computerSpeed);
-
+                paddleTopX += computerSpeed;
             } else {
-                setPaddleTopX(prevPaddleTopX => prevPaddleTopX - computerSpeed);
+                paddleTopX -= computerSpeed;
             }
         }
     }
 
+   
+    function handlePlayAgain() {
+        canvasRef.current.removeEventListener('click', handlePlayAgain);
+        startGame();
+    }
+    
+    function renderGameOver(winner) {
+        const canvas = canvasRef.current;
+        const context = contextRef.current;
+        context.clearRect(0, 0, width, height);
+        context.fillStyle = 'black';
+        context.fillRect(0, 0, width, height);
+    
+        context.font = 'bold 40px Arial';
+        context.fillStyle = 'white';
+        context.textAlign = 'center';
+        context.fillText(`${winner} Wins!`, width / 2, height / 2 - 50);
+    
+
+        context.fillStyle = 'green';
+        context.fillRect(width / 2 - 100, height / 2 + 20, 200, 50);
+    
+        context.font = 'bold 20px Arial';
+        context.fillStyle = 'white';
+        context.fillText('Play Again', width / 2, height / 2 + 55);
+    
+        canvas.addEventListener('click', handlePlayAgain);
+    }
+
+    function playAgainButton(context, x, y, text, onClick) {
+        context.fillStyle = 'rgb(195, 195, 195)';
+        context.fillRect(x, y, 200, 50);
+    
+        context.font = 'bold 20px Arial';
+        context.fillStyle = 'black';
+        context.textAlign = 'center';
+        context.fillText(text, x + 100, y + 30);
+    
+        canvasRef.current.addEventListener('click', onClick);
+    }
+    
+    function renderGameOver(winner) {
+        const canvas = canvasRef.current;
+        const context = contextRef.current;
+        context.clearRect(0, 0, width, height);
+        context.fillStyle = 'black';
+        context.fillRect(0, 0, width, height);
+    
+        context.font = 'bold 40px Arial';
+        context.fillStyle = 'white';
+        context.textAlign = 'center';
+        context.fillText(`${winner}`, width / 2, height / 2 - 50);
+    
+        playAgainButton(context, width / 2 - 100, height / 2 + 20, 'Play Again', handlePlayAgain);
+    }
+    
+
+    function handlePlayAgain() {
+        canvasRef.current.removeEventListener('click', handlePlayAgain);
+        startGame();
+    }
+
     function gameOver() {
         if (playerScore === winningScore || computerScore === winningScore) {
-            setIsGameOver(true);
-            // Set Winner
-            const winner = playerScore === winningScore ? 'Player 1' : 'Computer';
-            //showGameOverEl(winner);
+            isGameOver = true;
+            const winner = playerScore === winningScore ? 'You Win!' : 'Computer Wins!';
+            renderGameOver(winner);
         }
     }
 
@@ -176,50 +237,41 @@ function Pong() {
     }
 
     function startGame() {
-        setIsGameOver(false);
-        setIsNewGame(false);
-        setPlayerScore(0);
-        setComputerScore(0);
+        isGameOver = false;
+        isNewGame = false;
+        playerScore = 0;
+        computerScore = 0;
         ballReset();
         createCanvas();
         animate();
 
         canvasRef.current.addEventListener('mousemove', (e) => {
-            setPlayerMoved(true);
-            console.log("Mouse moved!");
-            console.log("Mouse X:", e.clientX);
-            console.log("Canvas Position:", canvasPosition);
-            console.log("Paddle Diff:", paddleDiff);
+            playerMoved = true;
             const newPaddleBottomX = e.clientX - canvasPosition - paddleDiff;
             if (newPaddleBottomX < paddleDiff) {
-                setPaddleBottomX(0);
+                paddleBottomX = 0;
             } else if (newPaddleBottomX > width - paddleWidth) {
-                setPaddleBottomX(width - paddleWidth);
+                paddleBottomX = width - paddleWidth;
             } else {
-                console.log("New Paddle Bottom X:", newPaddleBottomX);
-                setPaddleBottomX(newPaddleBottomX);
+                paddleBottomX = newPaddleBottomX;
             }
-            canvasRef.current.style.cursor = 'none';
+            if (!isGameOver) {
+                canvasRef.current.style.cursor = 'none';
+            } else {
+                canvasRef.current.style.cursor = 'ponter';
+            }
         });
-        
-
     }
 
     useEffect(() => {
-
         startGame();
-
-    }, [ ])
+    }, []);
 
     return (
         <main className='pong'>
-
-            <canvas
-                ref={canvasRef}
-            />
-
+            <canvas ref={canvasRef} />
         </main>
-    )
+    );
 }
 
 export default Pong;

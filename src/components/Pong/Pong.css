@@ -3,9 +3,10 @@
     background-color: rgb(39, 39, 39);
     display: flex;
     justify-content: center;
+    align-items: center; /* Center the canvas vertically */
     font-family: "Courier New", Courier, monospace;
+    height: 100vh; /* Make the container fill the entire viewport height */
 }
-
 canvas {
     margin-top: 25px;
     z-index: 10;
