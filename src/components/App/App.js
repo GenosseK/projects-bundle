@@ -20,11 +20,13 @@ import Calculator from '../Calculator/Calculator';
 import SplashPage from '../Splash-Page/Splash-Page';
 import PaintClone from '../Paint-Clone/Paint-Clone';
 import Pong from '../Pong/Pong';
+import GreetingPage from '../Greeting-Page/Greeting-Page';
 
 function App() {
   return (
     <div className="page">
       <Routes>
+        <Route path="/" element={<GreetingPage />} />
         <Route path='quote-generator' element={<QuoteGenerator />} />
         <Route path='infinite-scroll' element={<InfiniteScroll />} />
         <Route path='picture-in-picture' element={<PictureInPicture />} />

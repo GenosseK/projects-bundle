@@ -37,6 +37,7 @@
     cursor: pointer;
     user-select: none;
     outline: none;
+    font-family: Verdana, sans-serif;
 }
 
 .nasa-apod__navigation__button:hover {

@@ -28,7 +28,7 @@ canvas {
     align-items: center;
     color: whitesmoke;
 }
-
+/*
 button {
     cursor: pointer;
     color: rgb(0, 0, 0);
@@ -52,7 +52,7 @@ button:active {
 button:focus {
     outline: none;
 }
-
+*/
 /* Montior and Larger */
 @media screen and (min-width: 1800px) {
     canvas {

@@ -44,6 +44,7 @@
 }
 
 .quote__button {
+    font-family: Montserrat, sans-serif;
     cursor: pointer;
     font-size: 1.2rem;
     border: none;

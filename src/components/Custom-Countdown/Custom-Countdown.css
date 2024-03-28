@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    font-family: Nunito, sans-serif;
 }
 
 .countdown__video-container {
@@ -82,6 +83,7 @@
     color: white;
     cursor: pointer;
     outline: none;
+    font-family: Nunito, sans-serif;
 }
 
 .countdown__submit-button:hover {
