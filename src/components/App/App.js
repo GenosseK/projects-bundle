@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="page">
       <Routes>
-        <Route path="/" element={<GreetingPage />} />
+        <Route path="projects-bundle" element={<GreetingPage />} />
         <Route path='quote-generator' element={<QuoteGenerator />} />
         <Route path='infinite-scroll' element={<InfiniteScroll />} />
         <Route path='picture-in-picture' element={<PictureInPicture />} />

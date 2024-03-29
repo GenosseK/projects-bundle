@@ -269,7 +269,7 @@ function Pong() {
 
     return (
         <main className='pong'>
-            <canvas ref={canvasRef} />
+            <canvas ref={canvasRef} className='Pong__canvas' />
         </main>
     );
 }

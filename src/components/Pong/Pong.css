@@ -7,7 +7,8 @@
     font-family: "Courier New", Courier, monospace;
     height: 100vh; /* Make the container fill the entire viewport height */
 }
-canvas {
+
+.Pong__canvas {
     margin-top: 25px;
     z-index: 10;
 }

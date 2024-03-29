@@ -191,6 +191,7 @@ function PaintClone() {
                 onMouseMove={draw}
                 onMouseUp={endDrawing}
                 onMouseOut={endDrawing}
+                className='PaintClone__canvas'
             />
 
             <div className='PaintClone__mobile-message'>
