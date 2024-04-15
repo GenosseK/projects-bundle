@@ -153,6 +153,11 @@
     filter: brightness(110%);
 }
 
+.project__button:focus {
+    outline: none;
+}
+
+
 .primary {
     background: var(--primary-color);
     color: var(--on-primary);

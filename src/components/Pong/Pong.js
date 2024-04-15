@@ -36,7 +36,7 @@ function Pong() {
     let isGameOver = true;
     let isNewGame = true;
 
-    
+
 
     function renderCanvas() {
         const canvas = canvasRef.current;
@@ -144,73 +144,88 @@ function Pong() {
             }
         }
     }
+    /*
+        function computerAI() {
+            if (playerMoved) {
+                if (paddleTopX + paddleDiff < ballX) {
+                    paddleTopX += computerSpeed;
+                } else {
+                    paddleTopX -= computerSpeed;
+                }
+            }
+        } 
+    */
 
     function computerAI() {
         if (playerMoved) {
-            if (paddleTopX + paddleDiff < ballX) {
-                paddleTopX += computerSpeed;
+            // Calculate the target position for the computer paddle to intercept the ball
+            const targetPosition = ballX - paddleWidth / 2;
+
+            if (paddleTopX < targetPosition) {
+                paddleTopX += Math.min(computerSpeed, targetPosition - paddleTopX);
             } else {
-                paddleTopX -= computerSpeed;
+                paddleTopX -= Math.min(computerSpeed, paddleTopX - targetPosition);
             }
         }
     }
 
-   
+
+
     function handlePlayAgain() {
         canvasRef.current.removeEventListener('click', handlePlayAgain);
         startGame();
     }
-    
+
     function renderGameOver(winner) {
         const canvas = canvasRef.current;
         const context = contextRef.current;
         context.clearRect(0, 0, width, height);
         context.fillStyle = 'black';
         context.fillRect(0, 0, width, height);
-    
+
         context.font = 'bold 40px Arial';
         context.fillStyle = 'white';
         context.textAlign = 'center';
         context.fillText(`${winner} Wins!`, width / 2, height / 2 - 50);
-    
+
 
         context.fillStyle = 'green';
         context.fillRect(width / 2 - 100, height / 2 + 20, 200, 50);
-    
+
         context.font = 'bold 20px Arial';
         context.fillStyle = 'white';
         context.fillText('Play Again', width / 2, height / 2 + 55);
-    
+
         canvas.addEventListener('click', handlePlayAgain);
     }
 
     function playAgainButton(context, x, y, text, onClick) {
         context.fillStyle = 'rgb(195, 195, 195)';
         context.fillRect(x, y, 200, 50);
-    
+
         context.font = 'bold 20px Arial';
         context.fillStyle = 'black';
         context.textAlign = 'center';
         context.fillText(text, x + 100, y + 30);
-    
+
         canvasRef.current.addEventListener('click', onClick);
     }
-    
+
     function renderGameOver(winner) {
         const canvas = canvasRef.current;
         const context = contextRef.current;
         context.clearRect(0, 0, width, height);
         context.fillStyle = 'black';
         context.fillRect(0, 0, width, height);
-    
+
         context.font = 'bold 40px Arial';
         context.fillStyle = 'white';
         context.textAlign = 'center';
         context.fillText(`${winner}`, width / 2, height / 2 - 50);
-    
+
         playAgainButton(context, width / 2 - 100, height / 2 + 20, 'Play Again', handlePlayAgain);
     }
-    
+
 
     function handlePlayAgain() {
         canvasRef.current.removeEventListener('click', handlePlayAgain);

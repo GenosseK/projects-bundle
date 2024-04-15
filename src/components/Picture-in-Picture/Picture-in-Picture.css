@@ -64,6 +64,10 @@
     border-radius: 10px;
 }
 
+.button__start-video:focus {
+    outline: none;
+}
+
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }

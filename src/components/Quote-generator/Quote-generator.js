@@ -66,7 +66,7 @@ function QuoteGenerator() {
                         </div>
 
                         <div className='quote__button-container'>
-                            <TelegramShareButton url={window.location.href} title={getShareMessage()}>
+                            <TelegramShareButton className='quote__button_telegram' url={window.location.href} title={getShareMessage()}>
                                 <div className='quote__button button__share'>
                                     <FontAwesomeIcon icon={faTelegram} />
                                 </div>
