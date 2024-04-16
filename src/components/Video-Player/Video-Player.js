@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Video-Player.css';
 import LoadingAnimation from '../../images/Loading.svg'
 import { faExpand, faPlay, faVolumeUp, faPause, faVolumeMute } from '@fortawesome/free-solid-svg-icons';
+import VideoForPlayer from '../../images/video-for-player.mp4';
 
 function VideoPlayer() {
 
@@ -24,12 +25,17 @@ function VideoPlayer() {
             setIsLoading(false);
         };
 
-        video.current.addEventListener('loadeddata', handleLoadedData);
+        const videoElement = video.current;
 
-        return () => {
-            video.current.removeEventListener('loadeddata', handleLoadedData);
-        };
+        if (videoElement) {
+            videoElement.addEventListener('loadeddata', handleLoadedData);
+
+            return () => {
+                videoElement.removeEventListener('loadeddata', handleLoadedData);
+            };
+        }
     }, []);
+
 
     const togglePlay = () => {
         if (video.current.paused) {
@@ -55,11 +61,15 @@ function VideoPlayer() {
             togglePlay();
         };
 
-        video.current.addEventListener('click', handleVideoClick);
+        const videoElement = video.current;
 
-        return () => {
-            video.current.removeEventListener('click', handleVideoClick);
-        };
+        if (videoElement) {
+            videoElement.addEventListener('click', handleVideoClick);
+
+            return () => {
+                videoElement.removeEventListener('click', handleVideoClick);
+            };
+        }
     }, []);
 
     function displayTime(time) {
@@ -194,14 +204,18 @@ function VideoPlayer() {
             setIsPlaying(false);
         };
 
-        video.current.addEventListener('timeupdate', updateProgress);
-        video.current.addEventListener('ended', handleVideoEnd);
+        const videoElement = video.current;
+        if (videoElement) {
+            videoElement.addEventListener('timeupdate', updateProgress);
+            videoElement.addEventListener('ended', handleVideoEnd);
 
-        return () => {
-            video.current.removeEventListener('timeupdate', updateProgress);
-            video.current.removeEventListener('ended', handleVideoEnd);
-        };
+            return () => {
+                videoElement.removeEventListener('timeupdate', updateProgress);
+                videoElement.removeEventListener('ended', handleVideoEnd);
+            };
+        }
     }, []);
+
 
     useEffect(() => {
         const handleKeyPress = (e) => {
@@ -243,19 +257,19 @@ function VideoPlayer() {
     return (
         <main className='videoPlayer_main'>
             <div className='videoPlayer' ref={player}>
-            {isLoading && (
+                {isLoading && (
                     <div className="loading__container">
-                    <img
-                      src={LoadingAnimation}
-                      alt="Загрузка страницы"
-                      className="loading__animation"
-                    />
-                  </div>
+                        <img
+                            src={LoadingAnimation}
+                            alt="Загрузка страницы"
+                            className="loading__animation"
+                        />
+                    </div>
                 )}
                 <video
                     ref={video}
                     className={`videoPlayer__video ${isFullscreen ? 'video-fullscreen' : ''}`}
-                    src='https://pixabay.com/videos/download/video-41758_source.mp4?attachment'
+                    src={VideoForPlayer}
                     playsInline
                 ></video>
                 <div className='videoPlayer__container'>
