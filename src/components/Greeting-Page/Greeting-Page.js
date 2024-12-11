@@ -10,7 +10,7 @@ const GreetingPage = () => {
             <div className="projects-container">
                 <Link to="/quote-generator" className="project-button">Quote Generator</Link>
                 <Link to="/infinite-scroll" className="project-button">Infinite Scroll</Link>
-                <Link to="/picture-in-picture" className="project-button">Picture in Picture</Link>
+                <Link to="/picture-in-picture" className="project-button">Picture in Picture (use Chrome)</Link>
                 <Link to="/joke-teller" className="project-button">Joke Teller</Link>
                 <Link to="/dark-light" className="project-button">Dark/Light Mode</Link>
                 <Link to="/animated-template" className="project-button">Animated Template</Link>
